@@ -5,6 +5,9 @@
 // Booking lives on the practice's own site, so the CTA leaves this domain.
 const BOOKING_URL = 'https://springstderm.com/physicians/dr-olamiju/';
 
+// Her Amazon storefront of recommended products, also off-domain.
+const RECOMMENDATIONS_URL = 'https://www.amazon.com/shop/docbrianna';
+
 // One ordered list of top-level nav entries. An entry with `items` renders
 // as a dropdown; everything else is a plain link. Order here is the order
 // on the page.
@@ -19,6 +22,7 @@ const NAV_ITEMS = [
     ],
   },
   { label: 'Features', href: 'features.html' },
+  { label: 'Recommendations', href: RECOMMENDATIONS_URL, external: true },
   { label: 'Book an Appointment', href: BOOKING_URL, external: true, cta: true },
 ];
 
@@ -87,7 +91,9 @@ function renderNav() {
   return `
     <nav class="topnav" aria-label="Primary">
       <div class="topnav-inner">
-        <a class="nav-brand" href="index.html">Dr. Brianna</a>
+        <a class="nav-brand" href="index.html">
+          <img class="nav-logo" src="images/dr-brianna-logo.webp" alt="Dr. Brianna">
+        </a>
 
         <ul class="nav-links">
           ${desktopItems}

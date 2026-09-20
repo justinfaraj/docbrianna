@@ -37,26 +37,86 @@
         <div class="logo-box">Yahoo News</div>
       </div>
 
-      <!-- ===== PLACEHOLDER: ARTICLE LINKS =====
-           The individual features haven't been supplied yet, so nothing is
-           listed here — no titles or outlets beyond the four named above are
-           invented. When the links arrive, delete this .placeholder-note
-           block and list them here. A workable pattern, matching the rest of
-           the site:
+      <!-- Press index, styled after a newspaper's numbered article list:
+           serif headline, a byline-style outlet/year line, thin hairline
+           dividers between entries. Add new features by appending another
+           .press-item — the numbering is automatic (CSS counter). -->
+      <ol class="press-list">
+        <li class="press-item">
+          <a class="press-link" href="https://www.thecut.com/article/heat-rash-symptoms-cures-and-products.html" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">I Have Heat Rash Everywhere! What Can I Do?</span>
+            <span class="press-meta">The Cut &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://shopping.yahoo.com/beauty/skincare/article/the-14-bath-products-the-girls-of-showertok-cant-get-enough-of-210952874.html" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">The 14 Bath Products The Girls Of ShowerTok Can't Get Enough Of</span>
+            <span class="press-meta">Yahoo Shopping &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.womenshealthmag.com/beauty/a71241941/heating-pad-skin-damage/" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">Can Your Heating Pad Be Hurting Your Skin?</span>
+            <span class="press-meta">Women's Health Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.womenshealthmag.com/beauty/a71273187/how-often-use-body-lotion/" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">How Often You Should Apply Body Lotion, According to Dermatologists</span>
+            <span class="press-meta">Women's Health Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.womenshealthmag.com/beauty/a70639025/under-eye-bags-vs-dark-circles-vs-hollows/" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">Under-Eye Bags vs Dark Circles vs Hollows: What's the Difference?</span>
+            <span class="press-meta">Women's Health Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.self.com/story/when-to-wash-workout-clothes" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">How Frequently Should You Wash Your Workout Wear?</span>
+            <span class="press-meta">SELF Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.womenshealthmag.com/beauty/a70576577/hair-products-stopped-working/" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">Here's Exactly What To Do When Your Hair Products Stop Working, According to Experts</span>
+            <span class="press-meta">Women's Health Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.essence.com/beauty/menopause-changes-beauty-routine-skin-hair-nails-black-women" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">Menopause Changing Your Beauty Routine? Here's What Black Women Should Know</span>
+            <span class="press-meta">Essence Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.youtube.com/watch?v=nObaQzr3r4I&t=615s" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">Build Better Skin &ndash; Proven Ways to Grow New Collagen</span>
+            <span class="press-meta">American Society for Dermatologic Surgery &middot; 2025</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.allure.com/story/best-drugstore-body-washes" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">9 Best Drugstore Body Washes to Address Everything From Sensitive to Textured Skin</span>
+            <span class="press-meta">Allure Magazine &middot; 2026</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.yahoo.com/news/traction-alopecia-too-140000967.html" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">Traction Alopecia: When Is It Too Late?</span>
+            <span class="press-meta">Yahoo News &middot; 2023</span>
+          </a>
+        </li>
+        <li class="press-item">
+          <a class="press-link" href="https://www.allure.com/story/best-drugstore-exfoliators#experts" target="_blank" rel="noopener noreferrer">
+            <span class="press-headline">9 Drugstore Exfoliators to Unclog Pores and Soften Skin</span>
+            <span class="press-meta">Allure Magazine &middot; 2025</span>
+          </a>
+        </li>
+      </ol>
 
-             <ul class="pill-list">
-               <li><a class="inline-link" href="ARTICLE_URL" target="_blank" rel="noopener noreferrer">Article title &mdash; Outlet</a></li>
-             </ul>
-
-           or, if each feature should get more room, reuse the .card-grid /
-           .service-card pattern from the homepage's "My Services" section. -->
-      <div class="placeholder-note">
-        <p><strong>Featured articles coming soon.</strong></p>
-        <p>Dr. Brianna's published features and expert commentary will be linked here.</p>
-      </div>
-      <!-- ===== END PLACEHOLDER ===== -->
-
-      <p class="media-contact" style="margin-top:2.5rem;">
+      <p class="media-contact" style="margin-top:3rem;">
         For media/collaborations, please contact
         <a class="inline-link" href="mailto:askdocbrianna@gmail.com">askdocbrianna@gmail.com</a>
       </p>
