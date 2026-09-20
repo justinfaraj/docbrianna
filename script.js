@@ -196,30 +196,45 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------- Hamburger (narrow screens) ----------
+  // Full-screen panel: [hidden] (display:none) is what actually shows and
+  // hides it, same as before. The words fading in each time it opens (like
+  // the hero's page-load entrance) comes for free from that: an animation
+  // declared on .mobile-menu-link doesn't run while its ancestor is
+  // display:none, so removing [hidden] is exactly the moment it starts —
+  // no separate "just opened" class needed to retrigger it.
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
+
+  const setMenuOpen = (open) => {
+    if (!navToggle || !mobileMenu) return;
+    if (open) {
+      mobileMenu.removeAttribute('hidden');
+    } else {
+      mobileMenu.setAttribute('hidden', '');
+    }
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.classList.toggle('is-open', open);
+    // the panel covers the screen, so lock the page behind it rather
+    // than letting it scroll out of sync underneath
+    document.body.classList.toggle('nav-menu-open', open);
+  };
+
   if (navToggle && mobileMenu) {
     navToggle.addEventListener('click', () => {
-      const isOpen = !mobileMenu.hasAttribute('hidden');
-      if (isOpen) {
-        mobileMenu.setAttribute('hidden', '');
-      } else {
-        mobileMenu.removeAttribute('hidden');
-      }
-      navToggle.setAttribute('aria-expanded', String(!isOpen));
+      setMenuOpen(mobileMenu.hasAttribute('hidden'));
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.setAttribute('hidden', '');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.hasAttribute('hidden')) setMenuOpen(false);
     });
 
     document.addEventListener('click', (e) => {
       if (!mobileMenu.hasAttribute('hidden') && !e.target.closest('.mobile-nav')) {
-        mobileMenu.setAttribute('hidden', '');
-        navToggle.setAttribute('aria-expanded', 'false');
+        setMenuOpen(false);
       }
     });
   }
@@ -258,8 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // going back to the full menu leaves no hamburger to close
     if (!overflows && mobileMenu && !mobileMenu.hasAttribute('hidden')) {
-      mobileMenu.setAttribute('hidden', '');
-      if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+      setMenuOpen(false);
     }
   };
 

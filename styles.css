@@ -324,56 +324,106 @@ img { max-width: 100%; }
   cursor: pointer;
 }
 
+/* three bars -> an X: each bar keeps its own transform origin at center,
+   so rotating it in place after sliding it to the middle bar's position
+   (their stacked centers are 6px apart — see the gap/height math above)
+   reads as one continuous X rather than a bar spinning off-axis. */
 .nav-toggle .bar {
   width: 20px;
   height: 2px;
   border-radius: 2px;
   background: var(--black);
+  transition: transform 0.3s ease, opacity 0.2s ease;
 }
+
+.nav-toggle.is-open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.is-open .bar:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Full-screen panel, not a dropdown: it starts right under the sticky top
+   bar (which stays visible and in place above it) and fills the rest of
+   the viewport. [hidden] needs an explicit override here — an author
+   `display` on .mobile-menu would otherwise outrank the UA [hidden] rule
+   at equal specificity and the panel would never actually hide. */
+.mobile-menu[hidden] { display: none; }
 
 .mobile-menu {
-  position: absolute;
-  top: calc(100% + 0.6rem);
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
   right: 0;
-  min-width: 15rem;
+  bottom: 0;
   background: var(--white);
-  border: 1px solid var(--tint);
-  border-radius: 12px;
-  padding: 1.1rem 1.4rem;
-  box-shadow: var(--shadow);
   z-index: 60;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding: 2rem 2rem 3rem;
+  overflow-y: auto;
 }
 
+/* Body scroll locks behind the full-screen panel while it's open. */
+body.nav-menu-open { overflow: hidden; }
+
+/* .mobile-menu-link (a class, not the > a combinator) so .mobile-menu-cta
+   below — same specificity, later in the file — can still win back its
+   own font treatment for the one entry that isn't a plain "word". */
 .mobile-menu-link {
-  display: block;
-  margin-top: 0.9rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 8vw, 2.25rem);
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--black);
-  border-bottom: 2px solid var(--tint);
+  border-bottom: 2px solid transparent;
   padding-bottom: 2px;
   width: fit-content;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
 }
 
-.mobile-menu > :first-child { margin-top: 0; }
+/* Every entry is a direct <a> child of the panel (the Services group is
+   already flattened into plain links by script.js), so position alone
+   staggers all of them, CTA included — each fades/lifts in on its own
+   beat, the same entrance the hero text uses, restarting every time the
+   panel goes from [hidden] to shown. */
 
-.mobile-menu-link:hover { border-bottom-color: var(--black); }
+.mobile-menu > a:nth-child(1) { animation-delay: 0.1s; }
+.mobile-menu > a:nth-child(2) { animation-delay: 0.16s; }
+.mobile-menu > a:nth-child(3) { animation-delay: 0.22s; }
+.mobile-menu > a:nth-child(4) { animation-delay: 0.28s; }
+.mobile-menu > a:nth-child(5) { animation-delay: 0.34s; }
+.mobile-menu > a:nth-child(6) { animation-delay: 0.4s; }
+.mobile-menu > a:nth-child(7) { animation-delay: 0.46s; }
 
-/* Book an Appointment gets a filled pill instead of the plain underlined
-   link every other entry uses, so the one action on this menu stands out
-   rather than reading as just the last item in the list. */
+.mobile-menu-link:hover,
+.mobile-menu-link:focus-visible,
+.mobile-menu-link:active {
+  border-bottom-color: var(--tint);
+}
+
+/* Book an Appointment keeps the site's normal CTA-pill treatment (small
+   uppercase sans, filled black) rather than the large serif words around
+   it — it's a button, not one of the "words," and staying visually
+   consistent with every other Book an Appointment button is what makes
+   it read as the one actionable item here. */
 .mobile-menu-cta {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: normal;
   justify-content: center;
   width: 100%;
-  margin-top: 1.5rem;
-  padding: 0.9rem 1rem;
+  margin-top: 0.75rem;
+  padding: 1rem 1rem;
   border-radius: 10px;
   background: var(--black);
   color: var(--white);
   border-bottom: none;
-  letter-spacing: 0.1em;
   white-space: nowrap;
 }
 
