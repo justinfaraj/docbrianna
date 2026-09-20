@@ -1,100 +1,143 @@
 // ---------- SHARED NAV + FOOTER (single source of truth) ----------
-// Injected into every page via #site-nav / #site-footer placeholders so
-// future section additions only need to change the NAV_GROUPS list here.
+// Injected into every page via the #site-nav / #site-footer placeholders,
+// so a change here updates all five pages at once.
+
+// Booking lives on the practice's own site, so the CTA leaves this domain.
+const BOOKING_URL = 'https://springstderm.com/physicians/dr-olamiju/';
 
 // One ordered list of top-level nav entries. An entry with `items` renders
-// as a dropdown; an entry without renders as a plain link that navigates
-// straight there. Order here is the order on the page.
+// as a dropdown; everything else is a plain link. Order here is the order
+// on the page.
 const NAV_ITEMS = [
-  { label: 'Home', section: 'home' },
+  { label: 'Home', href: 'index.html' },
+  { label: 'About', href: 'about.html' },
   {
-    label: 'About',
+    label: 'Services',
     items: [
-      { text: "Meaghan's Story", href: 'about-meaghan.html' },
-      { text: 'Testimonials', href: 'testimonials.html' },
-      { text: 'Documents', href: 'documents.html' },
+      { text: 'Medical', href: 'medical-services.html' },
+      { text: 'Cosmetic', href: 'cosmetic-services.html' },
     ],
   },
-  {
-    label: 'Contact',
-    items: [
-      { text: 'Send a Message', href: 'send-a-message.html' },
-      { text: 'FAQ', href: 'faq.html' },
-    ],
-  },
-  { label: 'Book a Session', href: 'book-a-session.html' },
+  { label: 'Features', href: 'features.html' },
+  { label: 'Book an Appointment', href: BOOKING_URL, external: true, cta: true },
 ];
 
-// A "section" link scrolls within the current page if that section
-// exists here, otherwise it navigates to the homepage and scrolls there.
-// window.SITE_HOME_PAGE lets a page override the homepage URL (e.g. a
-// hosted preview where "index.html" isn't a real sibling file); it
-// defaults to the normal relative link used on the live site.
-function resolveHref(item) {
-  if (item.href) return item.href;
-  const onThisPage = document.getElementById(item.section);
-  const homePage = window.SITE_HOME_PAGE || 'index.html';
-  return onThisPage ? `#${item.section}` : `${homePage}#${item.section}`;
+const LOCATIONS = [
+  {
+    name: 'Spring Street Dermatology Uptown',
+    address: '4 W 58th St, Floor 13, New York, NY',
+    hours: ['Mondays, Tuesdays 9:00 AM &ndash; 6:00 PM', 'Select Saturdays 9:00 AM &ndash; 2:00 PM'],
+  },
+  {
+    name: 'Park Avenue',
+    address: '110 East 55th Street, Floor 19, New York, NY',
+    hours: ['Thursdays 9:30 AM &ndash; 6:00 PM'],
+  },
+];
+
+// Marks the entry matching the page being viewed. Pages are separate files
+// here rather than sections of one scrolling homepage, so this is a plain
+// filename comparison — no scroll tracking involved.
+function currentFile() {
+  const last = window.location.pathname.split('/').pop();
+  return last === '' ? 'index.html' : last;
+}
+
+function linkAttrs(item) {
+  return item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
 }
 
 function renderNav() {
-  const cornerItems = NAV_ITEMS.map((entry) => {
+  const here = currentFile();
+
+  const desktopItems = NAV_ITEMS.map((entry) => {
     if (!entry.items) {
-      return `
-        <div class="menu-col">
-          <a class="dropdown-toggle nav-plain-link" href="${resolveHref(entry)}">${entry.label}</a>
-        </div>
-      `;
+      const classes = ['nav-link'];
+      if (entry.cta) classes.push('nav-cta');
+      if (!entry.external && entry.href === here) classes.push('is-current');
+      const current = !entry.external && entry.href === here ? ' aria-current="page"' : '';
+      return `<li><a class="${classes.join(' ')}" href="${entry.href}"${linkAttrs(entry)}${current}>${entry.label}</a></li>`;
     }
+    const openHere = entry.items.some((item) => item.href === here);
     return `
-      <div class="menu-col dropdown">
-        <button class="dropdown-toggle" type="button" aria-expanded="false">
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle${openHere ? ' is-current' : ''}" type="button" aria-expanded="false">
           ${entry.label}
           <svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1 L5 5 L9 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <ul class="dropdown-panel">
-          ${entry.items.map((item) => `<li><a href="${resolveHref(item)}">${item.text}</a></li>`).join('')}
+        <ul class="nav-dropdown-panel">
+          ${entry.items.map((item) => `<li><a href="${item.href}"${item.href === here ? ' aria-current="page"' : ''}>${item.text}</a></li>`).join('')}
         </ul>
-      </div>
+      </li>
     `;
   }).join('');
 
   const mobileItems = NAV_ITEMS.map((entry) => {
     if (!entry.items) {
-      return `<a class="mobile-menu-link" href="${resolveHref(entry)}">${entry.label}</a>`;
+      return `<a class="mobile-menu-link" href="${entry.href}"${linkAttrs(entry)}>${entry.label}</a>`;
     }
     return `
       <h4>${entry.label}</h4>
       <ul>
-        ${entry.items.map((item) => `<li><a href="${resolveHref(item)}">${item.text}</a></li>`).join('')}
+        ${entry.items.map((item) => `<li><a href="${item.href}">${item.text}</a></li>`).join('')}
       </ul>
     `;
   }).join('');
 
   return `
-    <div class="mobile-nav">
-      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      <nav class="mobile-menu" id="mobile-menu" hidden>
-        ${mobileItems}
-      </nav>
-    </div>
+    <nav class="topnav" aria-label="Primary">
+      <div class="topnav-inner">
+        <a class="nav-brand" href="index.html">Dr. Brianna</a>
 
-    <nav class="corner-menu" aria-label="Primary">
-      ${cornerItems}
+        <ul class="nav-links">
+          ${desktopItems}
+        </ul>
+
+        <div class="mobile-nav">
+          <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          <div class="mobile-menu" id="mobile-menu" hidden>
+            ${mobileItems}
+          </div>
+        </div>
+      </div>
     </nav>
   `;
 }
 
 function renderFooter() {
+  const locations = LOCATIONS.map((loc) => `
+    <div class="location">
+      <h4>${loc.name}</h4>
+      <address>${loc.address}</address>
+      <ul class="location-hours">
+        ${loc.hours.map((h) => `<li>${h}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+
   return `
     <footer class="site-footer">
       <div class="site-footer-inner">
-        <p class="footer-copyright">Copyright &copy; 2026 Eagle Point Coaching LLC. All Rights Reserved.</p>
-        <p class="footer-credit">Website developed by Justin Farajollah. Email <a href="mailto:farajollahjustin@gmail.com" class="footer-link">farajollahjustin@gmail.com</a> to make your website vision a reality.</p>
+        <div class="footer-block">
+          <h3 class="footer-heading">Visit Us</h3>
+          <div class="locations">
+            ${locations}
+          </div>
+        </div>
+
+        <div class="footer-block">
+          <h3 class="footer-heading">Keep In Touch</h3>
+          <ul class="footer-contact">
+            <li><a class="footer-link" href="mailto:askdocbrianna@gmail.com">askdocbrianna@gmail.com</a></li>
+            <li>Office: <a class="footer-link" href="tel:+16469069614">646-906-9614</a></li>
+          </ul>
+        </div>
+
+        <p class="footer-credit">Copyright &copy; 2026 Brianna Olamiju, MD. All Rights Reserved.</p>
       </div>
     </footer>
   `;
@@ -107,107 +150,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerSlot = document.getElementById('site-footer');
   if (footerSlot) footerSlot.innerHTML = renderFooter();
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (prefersReducedMotion) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.body.classList.add('reduced-motion');
   }
 
-  // Vertical edge label: tracks whichever section is in view, and stays
-  // readable by splitting its ink at the exact pixel where the band behind
-  // it changes — the navy copy shows over ivory, the ivory copy over navy,
-  // so a word straddling a boundary is half one colour and half the other.
-  const sectionLabel = document.getElementById('section-label');
-  const sections = document.querySelectorAll('[data-label]');
+  // ---------- Services dropdown ----------
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  const closeDropdowns = () => {
+    dropdowns.forEach((d) => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  };
 
-  if (sectionLabel) {
-    const labelTexts = sectionLabel.querySelectorAll('.vertical-label-text');
-    const navyLayer = sectionLabel.querySelector('.vertical-label-navy');
-    const ivoryLayer = sectionLabel.querySelector('.vertical-label-ivory');
-    // every navy band on the page, the injected footer included
-    const darkBands = document.querySelectorAll('.section-dark, .site-footer');
-
-    const clipTo = (layer, top, bottom) => {
-      layer.style.clipPath = `inset(${top}px 0 ${bottom}px 0)`;
-    };
-
-    const updateLabelSplit = () => {
-      if (!navyLayer || !ivoryLayer) return;
-      const rect = sectionLabel.getBoundingClientRect();
-      const height = rect.height;
-      if (!height) return;
-
-      // how much of the label's own box sits over a navy band
-      let darkTop = null;
-      let darkBottom = null;
-      darkBands.forEach((band) => {
-        const b = band.getBoundingClientRect();
-        const top = Math.max(rect.top, b.top);
-        const bottom = Math.min(rect.bottom, b.bottom);
-        if (bottom <= top) return;
-        darkTop = darkTop === null ? top : Math.min(darkTop, top);
-        darkBottom = darkBottom === null ? bottom : Math.max(darkBottom, bottom);
-      });
-
-      if (darkTop === null) {
-        clipTo(ivoryLayer, height / 2, height / 2);  // nothing showing
-        clipTo(navyLayer, 0, 0);
-        return;
-      }
-
-      const insetTop = darkTop - rect.top;
-      const insetBottom = rect.bottom - darkBottom;
-      clipTo(ivoryLayer, insetTop, insetBottom);
-
-      // the navy copy takes the remainder — whichever side the boundary
-      // left room on (a band shorter than the label can't happen here,
-      // so at most one edge falls inside)
-      if (insetTop >= insetBottom) {
-        clipTo(navyLayer, 0, height - insetTop);
-      } else {
-        clipTo(navyLayer, height - insetBottom, 0);
-      }
-    };
-
-    let pending = false;
-    const scheduleLabelUpdate = () => {
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(() => {
-        pending = false;
-        updateLabelSplit();
-      });
-    };
-
-    window.addEventListener('scroll', scheduleLabelUpdate, { passive: true });
-    window.addEventListener('resize', scheduleLabelUpdate);
-
-    if (sections.length && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          // a longer or shorter word changes the label's height, so the
-          // split has to be remeasured alongside the text swap
-          labelTexts.forEach((node) => { node.textContent = entry.target.dataset.label; });
-          updateLabelSplit();
-        });
-      }, { rootMargin: '-45% 0px -45% 0px' });
-      sections.forEach((section) => observer.observe(section));
-    }
-
-    updateLabelSplit();
-  }
-
-  // Corner-menu dropdowns
-  const dropdowns = document.querySelectorAll('.corner-menu .dropdown');
   dropdowns.forEach((dropdown) => {
-    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
     toggle.addEventListener('click', () => {
       const wasOpen = dropdown.classList.contains('open');
-      dropdowns.forEach((d) => {
-        d.classList.remove('open');
-        d.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-      });
+      closeDropdowns();
       if (!wasOpen) {
         dropdown.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
@@ -216,15 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.corner-menu .dropdown')) {
-      dropdowns.forEach((d) => {
-        d.classList.remove('open');
-        d.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-      });
-    }
+    if (!e.target.closest('.nav-dropdown')) closeDropdowns();
   });
 
-  // Hamburger menu (narrow screens)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDropdowns();
+  });
+
+  // ---------- Hamburger (narrow screens) ----------
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
   if (navToggle && mobileMenu) {
@@ -253,26 +212,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- THE HEADER ROW NEVER WRAPS ----------
-  // The menu items hold their natural width, so a header with too little
-  // room overflows measurably instead of breaking onto a second line.
-  // That overflow is the signal to swap in the hamburger. It's measured
-  // rather than guessed at a breakpoint because the menu has different
-  // room on the homepage's half-width panel than in a subpage header.
-  const cornerMenu = document.querySelector('.corner-menu');
+  // ---------- THE NAV ROW NEVER WRAPS ----------
+  // Menu items hold their natural width, so a viewport with too little room
+  // overflows measurably instead of breaking onto a second line. That
+  // overflow is the signal to swap in the hamburger — measured rather than
+  // guessed at a breakpoint, since the brand mark and the five entries make
+  // the crossover point a function of the rendered font, not the viewport.
+  const navLinks = document.querySelector('.nav-links');
 
   const fitNav = () => {
-    if (!cornerMenu) return;
+    if (!navLinks) return;
 
-    // Measure expanded: the question is whether the full menu *would*
-    // fit, which can't be read while it's display:none. Removing the
-    // class and reading scrollWidth forces that layout synchronously,
-    // and the class is restored before the browser paints.
+    // Measure expanded: the question is whether the full menu *would* fit,
+    // which can't be read while it's display:none. Removing the class and
+    // reading scrollWidth forces that layout synchronously, and the class
+    // is restored before the browser paints.
     document.body.classList.remove('nav-collapsed');
+    const inner = navLinks.closest('.topnav-inner');
+    const brand = inner ? inner.querySelector('.nav-brand') : null;
     // clientWidth 0 means the narrow-screen media query is already hiding
     // the menu; agree with it rather than reporting a bogus "it fits"
-    const overflows = cornerMenu.clientWidth === 0
-      || cornerMenu.scrollWidth > cornerMenu.clientWidth + 1;
+    let overflows = navLinks.clientWidth === 0;
+    if (!overflows && inner && brand) {
+      const styles = window.getComputedStyle(inner);
+      const available = inner.clientWidth
+        - parseFloat(styles.paddingLeft)
+        - parseFloat(styles.paddingRight)
+        - brand.offsetWidth
+        - parseFloat(styles.columnGap || styles.gap || 0);
+      overflows = navLinks.scrollWidth > available + 1;
+    }
     document.body.classList.toggle('nav-collapsed', overflows);
 
     // going back to the full menu leaves no hamburger to close
@@ -306,65 +275,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.fonts.ready.then(fitNav);
   }
   fitNav();
-
-  // ---------- SEND A MESSAGE: mailto hand-off ----------
-  // There's no backend, so "submitting" this form means building a
-  // mailto: link from the field values and navigating to it — the visitor's
-  // own email client sends the actual message from their own account.
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    const nameField = document.getElementById('contact-name');
-    const emailField = document.getElementById('contact-email');
-    const messageField = document.getElementById('contact-message');
-    const statusEl = document.getElementById('contact-status');
-
-    const showStatus = (text) => {
-      statusEl.textContent = text;
-      statusEl.hidden = !text;
-    };
-
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = nameField.value.trim();
-      const email = emailField.value.trim();
-      const message = messageField.value.trim();
-
-      // Email is intentionally not required: the mailto opens from the
-      // visitor's own account regardless of what they type here.
-      const missing = [];
-      if (!name) missing.push(nameField);
-      if (!message) missing.push(messageField);
-
-      [nameField, messageField].forEach((f) => f.closest('.form-field').classList.remove('invalid'));
-
-      if (missing.length) {
-        missing.forEach((f) => f.closest('.form-field').classList.add('invalid'));
-        showStatus('Please fill in your name and message before sending.');
-        missing[0].focus();
-        return;
-      }
-
-      showStatus('');
-
-      const nameLine = email
-        ? `My name is ${name} (${email}), and I'm reaching out through your website.`
-        : `My name is ${name}, and I'm reaching out through your website.`;
-
-      const body = [
-        'Hi Meaghan,',
-        '',
-        nameLine,
-        '',
-        message,
-        '',
-        'Looking forward to hearing from you.',
-      ].join('\n');
-
-      const subject = 'New Message from Eagle Point Coaching Website';
-      const mailto = `mailto:meaghanjanedis@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      window.location.href = mailto;
-    });
-  }
 });
