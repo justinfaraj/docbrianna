@@ -1,0 +1,1644 @@
+:root {
+  --ivory: #FFFEF6;      /* page background, dominant surface */
+  --navy: #0D2844;       /* all primary text, headlines, buttons, dark sections */
+  --logo-blue: #62A2E0;  /* NON-TEXT ONLY: logo mark, accents, hover states, dots, rules */
+  --navy-soft: rgba(13, 40, 68, 0.7);  /* secondary text, captions, nav sub-items */
+  --ivory-soft: rgba(255, 254, 246, 0.72); /* the same, on navy bands */
+  --rule: rgba(13, 40, 68, 0.12);      /* hairlines, dividers, borders */
+  --serif: 'Playfair Display', Georgia, serif;
+  --script: 'Great Vibes', cursive;
+  --sans: 'Jost', Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--navy);
+  background: var(--ivory);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- SECTION 1: HERO ---------- */
+
+.page {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+}
+
+.panel {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.panel-left {
+  background: var(--ivory);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 4rem 3rem 5.5rem;
+}
+
+.panel-right {
+  background: var(--ivory);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* ---------- VERTICAL SECTION LABEL ---------- */
+
+/* Only a translate here, deliberately: the two layers below are clipped in
+   screen-aligned pixels, so no ancestor may rotate their coordinate space.
+   The rotation lives on .vertical-label-text instead. */
+.vertical-label {
+  position: fixed;
+  top: 50%;
+  left: 1.25rem;
+  transform: translateY(-50%);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.vertical-label-layer {
+  display: block;
+}
+
+/* the first copy stays in flow and gives the wrapper its size; the second
+   stacks exactly on top of it */
+.vertical-label-layer + .vertical-label-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.vertical-label-text {
+  display: block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.vertical-label-navy .vertical-label-text {
+  color: var(--navy-soft);
+}
+
+.vertical-label-ivory .vertical-label-text {
+  color: var(--ivory);
+}
+
+/* until the first measurement lands, show only the navy copy — every page
+   opens on an ivory band */
+.vertical-label-ivory {
+  clip-path: inset(50% 0 50% 0);
+}
+
+/* ---------- HERO LOGO ---------- */
+
+/* the h1 wrapping this carries no styling of its own — margin:0 below
+   just cancels the browser's default h1 margins, same job .headline used
+   to do for the text it replaced */
+.left-content h1 {
+  margin: 0;
+}
+
+.hero-logo {
+  display: block;
+  width: 100%;
+  max-width: 26rem;
+  height: auto;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease forwards;
+  animation-delay: 0.25s;
+}
+
+.subheading {
+  margin: 1.75rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--navy);
+  opacity: 0;
+  animation: fadeInUp 0.9s ease forwards;
+  animation-delay: 0.85s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---------- BOTTOM LEFT: QUOTE + ACTIONS ---------- */
+
+.bottom-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.book-btn {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--ivory);
+  padding: 1.1rem 2.2rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 2px solid var(--navy);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.book-btn:hover {
+  background: var(--logo-blue);
+  border-color: var(--logo-blue);
+  color: var(--navy);
+  transform: translateY(-2px);
+}
+
+/* ---------- BRAND GUIDE ARROWS ---------- */
+
+/* The swirly hand-drawn arrow that guides readers from one section into
+   the next — part of the brand identity, always --logo-blue */
+
+.guide-arrow {
+  color: var(--logo-blue);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.guide-arrow-hero {
+  position: absolute;
+  right: 2.2%;
+  /* anchored a fixed distance below the callout (not a % of container
+     height) so the gap can't shrink to nothing on short viewports */
+  top: calc(26% + 90px);
+  bottom: -70px;
+  width: 156px;
+}
+
+/* Variant B: left margin, carrying the eye from the navy About band down
+   across the boundary into the testimonials. Arrows mark handoffs between
+   sections only — never a flourish inside one section's own content. */
+.guide-arrow-testimonials {
+  position: absolute;
+  left: 4%;
+  /* starts inside the About band above and lands just short of the heading */
+  top: -170px;
+  width: 120px;
+  height: 370px;
+}
+
+/* the centered content column grows to fill more of the width as the
+   viewport narrows, so this left-margin arrow starts running into the
+   text below this point — hide rather than let them overlap */
+@media (max-width: 1400px) {
+  .guide-arrow-testimonials {
+    display: none;
+  }
+}
+
+/* ---------- RIGHT PANEL: PHOTO + CALLOUT ---------- */
+
+.meaghan-photo {
+  height: 90vh;
+  height: 90svh;
+  width: auto;
+  max-width: 94%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.photo-callout {
+  position: absolute;
+  top: 26%;
+  right: 4%;
+  z-index: 2;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  color: var(--navy);
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  opacity: 0;
+  animation: fadeIn 0.9s ease forwards;
+  animation-delay: 1s;
+}
+
+.photo-callout:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- SHARED NAV SLOT ---------- */
+
+/* the placeholder itself shouldn't participate in layout — its injected
+   children (.mobile-nav, .corner-menu) become direct flex/flow children
+   of whatever page-specific container hosts #site-nav */
+#site-nav {
+  display: contents;
+}
+
+/* ---------- CORNER MENU (dropdowns) ---------- */
+
+.corner-menu {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Never wrap. Items hold their natural width instead of compressing, so a
+   header too narrow for the full menu overflows measurably — script.js
+   watches for that and swaps in the hamburger rather than letting the row
+   break onto two lines. */
+.corner-menu .menu-col {
+  flex: 0 0 auto;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 0.45rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards;
+}
+
+/* delays run across every top-level entry in order, dropdown or not — the
+   plain links ("Home", "Book a Session") reuse .dropdown-toggle for
+   identical typography, minus the panel and chevron */
+.corner-menu .menu-col:nth-child(1) .dropdown-toggle { animation-delay: 0.3s; }
+.corner-menu .menu-col:nth-child(2) .dropdown-toggle { animation-delay: 0.4s; }
+.corner-menu .menu-col:nth-child(3) .dropdown-toggle { animation-delay: 0.5s; }
+.corner-menu .menu-col:nth-child(4) .dropdown-toggle { animation-delay: 0.6s; }
+
+.dropdown-toggle .chev {
+  width: 9px;
+  height: 6px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.dropdown.open .dropdown-toggle .chev {
+  transform: rotate(180deg);
+}
+
+.dropdown-toggle:focus-visible {
+  outline: 2px solid var(--logo-blue);
+  outline-offset: 3px;
+}
+
+.dropdown-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  left: -1rem;
+  min-width: 185px;
+  background: var(--ivory);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 12px 32px rgba(13, 40, 68, 0.16);
+  z-index: 25;
+}
+
+.dropdown.open .dropdown-panel {
+  display: block;
+}
+
+.dropdown-panel li {
+  margin-bottom: 0.55rem;
+}
+
+.dropdown-panel li:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-panel li a {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--navy-soft);
+  font-weight: 500;
+  white-space: nowrap;
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  opacity: 0;
+}
+
+.dropdown-panel li a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* dropdown items enter exactly like the page-load text animation */
+.dropdown.open .dropdown-panel li a {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.dropdown.open .dropdown-panel li:nth-child(1) a { animation-delay: 0.05s; }
+.dropdown.open .dropdown-panel li:nth-child(2) a { animation-delay: 0.11s; }
+.dropdown.open .dropdown-panel li:nth-child(3) a { animation-delay: 0.17s; }
+.dropdown.open .dropdown-panel li:nth-child(4) a { animation-delay: 0.23s; }
+
+/* ---------- MOBILE NAV (hamburger, shown below 768px) ---------- */
+
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 30;
+}
+
+/* The swap between the full menu and the hamburger is driven by measured
+   overflow (see fitNav in script.js), not by a width guess — the menu has
+   different room on the homepage's half-width panel than in a subpage
+   header, so no single breakpoint is right for both. */
+.nav-collapsed .corner-menu {
+  display: none;
+}
+
+.nav-collapsed .mobile-nav {
+  display: block;
+}
+
+/* reserve room for the absolutely-positioned hamburger so it can't sit
+   under the wordmark */
+.nav-collapsed .story-header {
+  padding-left: 4.5rem;
+}
+
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  /* 44px square: the smallest comfortable thumb target */
+  width: 44px;
+  height: 44px;
+  background: var(--ivory);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav-toggle .bar {
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--navy);
+}
+
+.mobile-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 230px;
+  background: var(--ivory);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 12px 32px rgba(13, 40, 68, 0.18);
+}
+
+.mobile-menu h4 {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  margin: 1.1rem 0 0.6rem;
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards;
+}
+
+.mobile-menu > :first-child {
+  margin-top: 0;
+}
+
+.mobile-menu ul li {
+  margin-bottom: 0.5rem;
+}
+
+.mobile-menu ul li a {
+  font-size: 0.85rem;
+  color: var(--navy-soft);
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.mobile-menu ul li a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* opening the hamburger replays the page-load entrance animation, in the
+   same top-to-bottom order the entries appear: Home, About, Contact, Book */
+.mobile-menu h4:nth-of-type(1) { animation-delay: 0.14s; }
+.mobile-menu h4:nth-of-type(2) { animation-delay: 0.32s; }
+
+.mobile-menu ul:nth-of-type(1) li:nth-child(1) a { animation-delay: 0.2s; }
+.mobile-menu ul:nth-of-type(1) li:nth-child(2) a { animation-delay: 0.26s; }
+.mobile-menu ul:nth-of-type(1) li:nth-child(3) a { animation-delay: 0.32s; }
+.mobile-menu ul:nth-of-type(2) li:nth-child(1) a { animation-delay: 0.38s; }
+.mobile-menu ul:nth-of-type(2) li:nth-child(2) a { animation-delay: 0.44s; }
+
+/* The plain top-level links ("Home" first, "Book a Session" last). They sit
+   among the ABOUT/CONTACT group headers, which are identical type but not
+   tappable — the underline is what tells them apart, and it matches how
+   every other link on the site marks itself. */
+.mobile-menu-link {
+  display: block;
+  margin-top: 1.1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.mobile-menu-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.mobile-menu-link:first-child {
+  animation-delay: 0.05s;
+}
+
+/* ---------- DARK SECTIONS (even sections: navy band) ---------- */
+
+.section-dark {
+  background: var(--navy);
+  color: var(--ivory);
+}
+
+.section-dark .about-heading,
+.section-dark .about-text,
+.section-dark .about-credentials li {
+  color: var(--ivory);
+}
+
+.section-dark .about-credentials {
+  border-top-color: var(--logo-blue);
+}
+
+.section-dark .about-link {
+  color: var(--ivory);
+}
+
+/* ---------- SECTION 2: ABOUT ---------- */
+
+.about {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 5rem 2rem;
+  max-width: 46rem;
+}
+
+.about-heading {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+  color: var(--navy);
+}
+
+.about-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--navy);
+  margin: 0;
+  max-width: 38rem;
+}
+
+.about-credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.5rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+.about-credentials li {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.about-credentials li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--logo-blue);
+  margin-right: 0.65rem;
+  vertical-align: middle;
+}
+
+.about-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.about-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- SECTION 3: TESTIMONIALS ---------- */
+
+/* one screenful, like every other section: the three quotes sit centered
+   in a full-height band rather than scrolling within it */
+.testimonials {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ivory);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 4rem 2rem;
+}
+
+.testimonials-inner {
+  width: 100%;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0 0 2.75rem;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--navy);
+}
+
+/* no cards or rules here — the alternating alignment and the gaps do all
+   of the organizing, so the section stays quiet next to the navy band */
+.quote-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.quote-block {
+  width: 52%;
+  margin: 0;
+}
+
+.quote-left {
+  align-self: flex-start;
+  text-align: left;
+}
+
+.quote-right {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.quote-block blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.55vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--navy);
+  text-wrap: pretty;
+}
+
+.quote-attribution {
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--navy-soft);
+}
+
+.quote-attribution::before {
+  content: '';
+  display: inline-block;
+  width: 1.4rem;
+  height: 1px;
+  background: var(--logo-blue);
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+.quote-right .quote-attribution::before {
+  margin: 0 0 0 0.6rem;
+  float: right;
+  /* nudge onto the text's optical baseline now that it's floated */
+  margin-top: 0.55rem;
+}
+
+.testimonials-more {
+  margin: 2.25rem 0 0;
+  text-align: center;
+}
+
+/* short desktop viewports (a laptop with browser chrome) would otherwise
+   push this section a few pixels past one screen — tighten rather than
+   let it be the one section you have to scroll inside */
+@media (min-width: 769px) and (max-height: 780px) {
+  .testimonials {
+    padding: 2.5rem 2rem;
+  }
+
+  .testimonials-heading {
+    margin-bottom: 2rem;
+  }
+
+  .quote-stack {
+    gap: 2rem;
+  }
+}
+
+.quote-affiliation {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-weight: 400;
+}
+
+/* ---------- FULL STORY PAGE ---------- */
+
+.story-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.25rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* the corner-menu's margin-bottom is for hero spacing; inside the story
+   header it should just sit centered with its siblings, on the left */
+.story-header .corner-menu {
+  margin-bottom: 0;
+}
+
+/* the logo always sits on the right, whatever else is (or isn't)
+   participating in this row's flex layout */
+.story-wordmark {
+  display: block;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.story-logo {
+  display: block;
+  height: 2.75rem;
+  width: auto;
+  max-width: 100%;
+}
+
+.story {
+  position: relative;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 5rem 2rem 7rem;
+}
+
+.story .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.7rem;
+  color: var(--navy-soft);
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+}
+
+.story-heading {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1.05;
+  color: var(--navy);
+  margin: 0 0 2.5rem;
+  text-wrap: balance;
+}
+
+.story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.story-body p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--navy);
+  margin: 0;
+}
+
+/* ---------- BOOKING PAGE ---------- */
+
+.booking {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 4rem 2rem 5rem;
+}
+
+.booking-intro {
+  margin: -1.5rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--navy);
+}
+
+.policy-card {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 2rem 0 0;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--logo-blue);
+  border-radius: 12px;
+}
+
+.policy-heading {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.policy-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--navy-soft);
+}
+
+.calendly-inline-widget {
+  width: 100%;
+  height: 760px;
+  min-height: 700px;
+}
+
+@media (max-width: 768px) {
+  .booking {
+    padding: 2.5rem 1.25rem 4rem;
+  }
+
+  .calendly-inline-widget {
+    height: 1050px;
+    min-height: 900px;
+  }
+}
+
+/* ---------- TESTIMONIALS PAGE ---------- */
+
+/* the ivory intro block is the first beat of the alternation the entries
+   continue: intro ivory, then navy, ivory, navy, ivory, then the navy
+   footer — so the page alternates cleanly end to end */
+.testimonials-intro {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 4.5rem 2rem 3rem;
+}
+
+.testimonials-intro .story-heading {
+  margin-bottom: 1rem;
+}
+
+.testimonials-intro-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--navy-soft);
+}
+
+/* one column, full-width bands: these run from one paragraph to four, and
+   a zigzag or grid would leave the mismatched heights looking broken. The
+   background change between entries is the divider. */
+.testimonial-entry {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+/* One arrow per handoff between testimonials, alternating sides down the
+   page starting on the right. Each is anchored to the entry it leads into
+   and reaches up across the boundary above it — the same crossing gesture
+   the homepage arrow makes on the way into the testimonials. The heading
+   hands straight off to the first quote with no arrow between them. */
+.guide-arrow-testi-step {
+  position: absolute;
+  top: -190px;
+  /* 108 x 382 matches the 130 x 460 viewBox, so nothing letterboxes */
+  width: 108px;
+  height: 382px;
+  z-index: 6;
+}
+
+.guide-arrow-testi-step.on-right {
+  right: 6%;
+}
+
+.guide-arrow-testi-step.on-left {
+  left: 6%;
+}
+
+/* mirrored so two path shapes read as four distinct arrows */
+.guide-arrow-testi-step.flip {
+  transform: scaleX(-1);
+}
+
+/* below this the margins outside the 46rem column are too thin to hold an
+   arrow clear of the text */
+@media (max-width: 1150px) {
+  .guide-arrow-testi-step {
+    display: none;
+  }
+}
+
+.testimonial-entry-inner {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 4.5rem 2rem;
+}
+
+.testimonial-quote {
+  margin: 0 0 1.5rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--navy);
+}
+
+.testimonial-quote p {
+  /* a notch under the homepage pull-quotes: at display size, four
+     paragraphs of italic serif would be tiring to read */
+  margin: 0 0 1.15rem;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.testimonial-quote p:last-child {
+  margin-bottom: 0;
+}
+
+.section-dark .testimonial-quote {
+  color: var(--ivory);
+}
+
+.section-dark .quote-attribution {
+  color: var(--ivory-soft);
+}
+
+@media (max-width: 768px) {
+  .testimonials-intro {
+    padding: 3rem 1.75rem 2.25rem;
+  }
+
+  .testimonial-entry-inner {
+    padding: 3rem 1.75rem;
+  }
+
+  .testimonial-quote p {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+}
+
+/* ---------- SEND A MESSAGE PAGE ---------- */
+
+.contact {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 4.5rem 2rem 6rem;
+}
+
+.contact-subheading {
+  margin: 1rem 0 2.75rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--navy-soft);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--ivory);
+  color: var(--navy);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 8rem;
+  line-height: 1.6;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--logo-blue);
+}
+
+/* a field flagged by validation, without a red that would clash with the
+   site's navy/ivory/blue palette */
+.form-field.invalid label {
+  color: var(--logo-blue);
+}
+
+.form-field.invalid input,
+.form-field.invalid textarea {
+  border-color: var(--logo-blue);
+}
+
+.contact-helper {
+  margin: -0.5rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--navy-soft);
+}
+
+.contact-status {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.contact-submit {
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 3rem 1.75rem 4.5rem;
+  }
+
+  .contact-submit {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+/* ---------- FAQ PAGE ---------- */
+
+.faq {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 4.5rem 2rem 6rem;
+}
+
+.faq-intro {
+  margin: 1.25rem 0 2.75rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--navy-soft);
+}
+
+.faq-link {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.faq-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* hairline above the first question so the stack reads as one list */
+.faq-list {
+  border-top: 1px solid var(--rule);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  cursor: pointer;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.08rem;
+  line-height: 1.4;
+  color: var(--navy);
+  /* drop the default disclosure triangle in favour of the +/- below */
+  list-style: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question:focus-visible {
+  outline: 2px solid var(--logo-blue);
+  outline-offset: 3px;
+}
+
+.faq-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--logo-blue);
+  transition: transform 0.25s ease;
+}
+
+.faq-question:hover .faq-icon {
+  transform: scale(1.15);
+}
+
+/* the plus loses its upright to become a minus when the answer opens */
+.faq-icon-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.faq-item[open] .faq-icon-bar {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.faq-answer {
+  margin: 0;
+  /* the right inset keeps the answer clear of the indicator column */
+  padding: 0 2.5rem 1.65rem 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--navy-soft);
+}
+
+/* answers enter exactly like the nav dropdown items */
+.faq-item[open] .faq-answer {
+  animation: fadeInUp 0.35s ease;
+}
+
+@media (max-width: 768px) {
+  .faq {
+    padding: 3rem 1.75rem 4.5rem;
+  }
+
+  .faq-question {
+    font-size: 1rem;
+    gap: 1rem;
+  }
+
+  .faq-answer {
+    padding-right: 0;
+  }
+}
+
+/* ---------- DOCUMENTS PAGE ---------- */
+
+.documents {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 4rem 2rem 5rem;
+}
+
+.doc-section {
+  margin-top: 3rem;
+}
+
+.doc-section:first-of-type {
+  margin-top: 2rem;
+}
+
+.doc-section-heading {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin: 0 0 1.25rem;
+}
+
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doc-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.doc-type {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ivory);
+  background: var(--navy);
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.doc-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 0;
+}
+
+.doc-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.doc-action {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.doc-action:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* empty state: dashed rule + reduced opacity read as "intentionally
+   empty for now", distinct from the populated cards above */
+.doc-empty {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px dashed var(--rule);
+  border-radius: 12px;
+  opacity: 0.85;
+}
+
+.doc-empty-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--logo-blue);
+  opacity: 0.55;
+}
+
+.doc-empty p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--navy-soft);
+}
+
+@media (max-width: 768px) {
+  .documents {
+    padding: 2.5rem 1.25rem 4rem;
+  }
+
+  .doc-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- SITE FOOTER ---------- */
+
+.site-footer {
+  background: var(--navy);
+  color: var(--ivory);
+}
+
+.site-footer-inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.footer-copyright {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--ivory);
+}
+
+.footer-credit {
+  margin: 0;
+  padding-top: 1rem;
+  width: 100%;
+  border-top: 1px solid rgba(98, 162, 224, 0.3);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  color: var(--ivory);
+  opacity: 0.85;
+}
+
+.footer-link {
+  color: var(--ivory);
+  text-decoration: underline;
+  text-decoration-color: var(--logo-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  opacity: 1;
+}
+
+.footer-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+.reduced-motion .hero-logo,
+.reduced-motion .subheading,
+.reduced-motion .photo-callout,
+.reduced-motion .dropdown-toggle,
+.reduced-motion .dropdown-panel li a,
+.reduced-motion .mobile-menu h4,
+.reduced-motion .mobile-menu ul li a,
+.reduced-motion .mobile-menu-link,
+.reduced-motion .faq-item[open] .faq-answer {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ---------- RESPONSIVE: BELOW 768px ---------- */
+
+@media (max-width: 768px) {
+  /* sections switch from fixed full-screen height to natural flow */
+  .page {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+
+  .panel {
+    width: 100%;
+    height: auto;
+  }
+
+  /* photo stacks below the branding/text */
+  .panel-left {
+    order: 1;
+    /* fills the opening screen and centers the headline/button block
+       inside it, rather than leaving that block pinned to the top under
+       the hamburger — the photo now sits a scroll below, on its own */
+    min-height: 100svh;
+    justify-content: center;
+    padding: 4.5rem 1.75rem 2.5rem;
+  }
+
+  .panel-right {
+    order: 2;
+    /* left padding matches panel-left's, so the photo lines up under the
+       headline above it; the photo itself stays narrower than the full
+       width (see .meaghan-photo) so the callout has real room beside it
+       on the right, rather than sitting on top of her */
+    padding: 2.5rem 1.75rem 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meaghan-photo {
+    height: auto;
+    width: 62%;
+    max-width: 280px;
+  }
+
+  /* Sits beside the photo, not over it — at this width there isn't
+     enough clear background next to her head to hold two lines of text
+     without crossing onto her face, so the photo stays narrower and
+     left-aligned, leaving a genuine gap on the right for the callout.
+     top:33% lands it a little above where her shoulders widen out, and
+     right:1.75rem lines its edge up with the headline block above. */
+  .photo-callout {
+    position: absolute;
+    top: 33%;
+    right: 1.75rem;
+    width: 7.25rem;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    text-align: right;
+  }
+
+  .vertical-label {
+    display: none;
+  }
+
+  /* fallback for the no-JS case; with script.js running, fitNav has
+     already collapsed the nav well before this width */
+  .corner-menu {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .bottom-left {
+    margin-top: 2.5rem;
+  }
+
+  .book-btn {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.68rem;
+  }
+
+  /* the tall hero arrow would leave a gap under the stacked photo here,
+     so it hides; the callout-to-photo curl that used to fill that gap is
+     gone too, now that the callout sits on the photo instead of above it */
+  .guide-arrow-hero {
+    display: none;
+  }
+
+  .about {
+    min-height: 0;
+  }
+
+  .about-content {
+    padding: 3.5rem 1.75rem 4.5rem;
+  }
+
+  .testimonials {
+    min-height: 0;
+    padding: 3.5rem 1.75rem 4.5rem;
+  }
+
+  .testimonials-heading {
+    margin-bottom: 2.25rem;
+  }
+
+  /* one column, all flush left — right-ragged body copy reads poorly at
+     phone widths, so the alternation gives way to plain readability */
+  .quote-block {
+    width: 100%;
+    text-align: left;
+  }
+
+  .quote-right .quote-attribution::before {
+    float: none;
+    margin: 0 0.6rem 0 0;
+  }
+
+  .story-header {
+    /* extra left padding reserves room for the absolutely-positioned
+       hamburger button so it doesn't sit under the logo */
+    padding: 1.5rem 1.75rem 1.5rem 4.5rem;
+  }
+
+  .story {
+    padding: 3rem 1.75rem 5rem;
+  }
+
+  /* ----- touch targets -----
+     Standalone controls get to 44px, the smallest comfortable thumb
+     target. Links sitting inside a sentence are left alone: padding them
+     to 44px would overlap the hit areas of the lines above and below,
+     and WCAG exempts inline links for exactly that reason. */
+
+  /* min-height rather than padding arithmetic: the box lands on 44px
+     whatever the text's line box happens to measure */
+  .mobile-menu ul li a,
+  .about-link,
+  .doc-action {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* inline-flex, not flex: the underline that marks it as tappable should
+     hug the words rather than stretch across the whole panel */
+  .mobile-menu-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 0.4rem;
+  }
+
+  .mobile-menu ul li {
+    margin-bottom: 0;
+  }
+
+  .mobile-menu h4 {
+    margin: 0.75rem 0 0;
+  }
+
+  .story-wordmark {
+    padding: 0.75rem 0;
+  }
+
+  /* the two actions sit side by side, so they need horizontal separation
+     as well as height before a thumb can hit them reliably */
+  .doc-actions {
+    gap: 2rem;
+  }
+
+  .book-btn,
+  .contact-submit {
+    padding: 1rem 2rem;
+  }
+
+  /* ----- legibility -----
+     Nothing under 12px: the uppercase letterspaced labels were rendering
+     between 9.9px and 11.5px, which is hard going on a phone. */
+
+  .book-btn {
+    font-size: 0.78rem;
+  }
+
+  .doc-type,
+  .mobile-menu-link,
+  .mobile-menu h4 {
+    font-size: 0.78rem;
+  }
+
+  .story .eyebrow,
+  .policy-heading {
+    font-size: 0.78rem;
+  }
+
+  .quote-attribution,
+  .quote-affiliation,
+  .form-field label {
+    font-size: 0.78rem;
+  }
+
+  /* 16px exactly: below that, iOS Safari zooms the page in when a field
+     takes focus and leaves the visitor scrolled sideways */
+  .form-field input,
+  .form-field textarea {
+    font-size: 16px;
+  }
+}

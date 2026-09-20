@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Session | Eagle Point Coaching</title>
+<meta name="description" content="Schedule your executive coaching session with Meaghan Janedis at Eagle Point Coaching.">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="story-header">
+  <!-- Shared nav (mobile-nav + corner-menu), injected by script.js -->
+  <div id="site-nav"></div>
+
+  <!-- Logo sits on the right on every page but the homepage; it doubles
+       as the way back to the homepage, so there's no separate back link -->
+  <a href="index.html" class="story-wordmark"><img class="story-logo" src="assets/images/eagle-point-logo.png" alt="Eagle Point Coaching logo"></a>
+</header>
+
+<main class="booking">
+  <h1 class="story-heading">Book a Session</h1>
+  <p class="booking-intro">Ready to take the next step? Find a time that works for you below.</p>
+
+  <!-- Calendly inline embed -->
+  <div class="calendly-inline-widget" data-url="https://calendly.com/mj-eaglepointcoaching?hide_gdpr_banner=1"></div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <aside class="policy-card" aria-label="Cancellation and no-show policy">
+    <h2 class="policy-heading">Cancellation &amp; No-Show Policy</h2>
+    <p>
+      We ask that you please reschedule or cancel at least 24 hours before the
+      beginning of your appointment or you may be charged a cancellation fee of
+      100% the price of your scheduled appointment. To ensure efficient
+      scheduling and optimal service delivery, please confirm your appointment
+      when texted. Kindly provide a minimum of 24 hours' notice for any
+      cancellations, failing which a $50 fee will be charged. Additionally,
+      appointments cancelled within 3 hours of the scheduled time will incur
+      the full service charge. We kindly request that you reschedule or cancel
+      at least 24 hours prior to your appointment to avoid a cancellation fee
+      equal to 100% of the scheduled service price.
+    </p>
+  </aside>
+</main>
+
+<!-- Shared footer, injected by script.js -->
+<div id="site-footer"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
