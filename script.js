@@ -17,8 +17,11 @@ const NAV_ITEMS = [
   {
     label: 'Services',
     items: [
-      { text: 'Medical', href: 'medical-services.html' },
-      { text: 'Cosmetic', href: 'cosmetic-services.html' },
+      // mobileText is the flattened label used in the hamburger menu,
+      // which has no "Services" parent heading to give "Medical" and
+      // "Cosmetic" their context the way the desktop dropdown does.
+      { text: 'Medical', mobileText: 'Medical Services', href: 'medical-services.html' },
+      { text: 'Cosmetic', mobileText: 'Cosmetic Services', href: 'cosmetic-services.html' },
     ],
   },
   { label: 'Features', href: 'features.html' },
@@ -78,14 +81,17 @@ function renderNav() {
 
   const mobileItems = NAV_ITEMS.map((entry) => {
     if (!entry.items) {
-      return `<a class="mobile-menu-link" href="${entry.href}"${linkAttrs(entry)}>${entry.label}</a>`;
+      const classes = ['mobile-menu-link'];
+      if (entry.cta) classes.push('mobile-menu-cta');
+      return `<a class="${classes.join(' ')}" href="${entry.href}"${linkAttrs(entry)}>${entry.label}</a>`;
     }
-    return `
-      <h4>${entry.label}</h4>
-      <ul>
-        ${entry.items.map((item) => `<li><a href="${item.href}">${item.text}</a></li>`).join('')}
-      </ul>
-    `;
+    // Flattened into full links matching the rest of the menu, rather than
+    // a "Services" sub-heading with an indented list — there's no room for
+    // a hover-style dropdown on mobile, and each item's mobileText already
+    // names the service on its own ("Medical Services", not just "Medical").
+    return entry.items
+      .map((item) => `<a class="mobile-menu-link" href="${item.href}">${item.mobileText || item.text}</a>`)
+      .join('');
   }).join('');
 
   return `

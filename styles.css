@@ -359,29 +359,28 @@ img { max-width: 100%; }
 
 .mobile-menu > :first-child { margin-top: 0; }
 
-.mobile-menu h4 {
-  margin: 1.1rem 0 0.55rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--black);
-}
-
-.mobile-menu ul li { margin-bottom: 0.5rem; }
-.mobile-menu ul li:last-child { margin-bottom: 0; }
-
-.mobile-menu ul li a {
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--black);
-  border-bottom: 2px solid var(--tint);
-  padding-bottom: 1px;
-}
-
-.mobile-menu ul li a:hover,
 .mobile-menu-link:hover { border-bottom-color: var(--black); }
+
+/* Book an Appointment gets a filled pill instead of the plain underlined
+   link every other entry uses, so the one action on this menu stands out
+   rather than reading as just the last item in the list. */
+.mobile-menu-cta {
+  justify-content: center;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  background: var(--black);
+  color: var(--white);
+  border-bottom: none;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.mobile-menu-cta:hover {
+  background: var(--tint);
+  color: var(--black);
+}
 
 /* ---------- HERO ---------- */
 
@@ -1109,7 +1108,6 @@ img { max-width: 100%; }
      Standalone controls reach 44px. Links inside a sentence are left
      alone: padding them to 44px would overlap the lines above and below,
      and WCAG exempts inline links for exactly that reason. */
-  .mobile-menu ul li a,
   .text-link {
     display: inline-flex;
     align-items: center;
@@ -1117,16 +1115,13 @@ img { max-width: 100%; }
   }
 
   /* block-level flex, not inline-flex: each top-level entry (Home, About,
-     Features, ...) needs its own line, and inline-flex was letting them
-     sit side by side like wrapped text instead of stacking. */
+     Medical Services, ...) needs its own line, and inline-flex was letting
+     them sit side by side like wrapped text instead of stacking. */
   .mobile-menu-link {
     display: flex;
     align-items: center;
     min-height: 44px;
   }
-
-  .mobile-menu ul li { margin-bottom: 0; }
-  .mobile-menu h4 { margin: 0.75rem 0 0; }
 }
 
 @media (max-width: 480px) {
