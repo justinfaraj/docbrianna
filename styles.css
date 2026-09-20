@@ -60,6 +60,11 @@ img { max-width: 100%; }
   to   { opacity: 1; }
 }
 
+@keyframes fadeOutDown {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(10px); }
+}
+
 /* ---------- SHARED SECTION SHELL ---------- */
 
 /* Every band on the site is a .section; the wash alternates by adding
@@ -364,6 +369,15 @@ img { max-width: 100%; }
   overflow-y: auto;
 }
 
+/* Closing plays this once (script.js adds the class, then swaps in
+   [hidden] once it finishes) instead of the instant cut [hidden] alone
+   would give it. 0.22s — quicker than any single word's 0.6s fade-in,
+   let alone the full ~1s staggered reveal — so dismissing feels snappy
+   next to the more leisurely, delightful entrance. */
+.mobile-menu.closing {
+  animation: fadeOutDown 0.22s ease forwards;
+}
+
 /* Body scroll locks behind the full-screen panel while it's open. */
 body.nav-menu-open { overflow: hidden; }
 
@@ -405,6 +419,12 @@ body.nav-menu-open { overflow: hidden; }
   border-bottom-color: var(--tint);
 }
 
+/* the page you're already on, underlined the same way it is in the
+   desktop nav (.nav-link.is-current) */
+.mobile-menu-link.is-current {
+  border-bottom-color: var(--black);
+}
+
 /* Book an Appointment keeps the site's normal CTA-pill treatment (small
    uppercase sans, filled black) rather than the large serif words around
    it — it's a button, not one of the "words," and staying visually
@@ -412,7 +432,7 @@ body.nav-menu-open { overflow: hidden; }
    it read as the one actionable item here. */
 .mobile-menu-cta {
   font-family: var(--sans);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   line-height: normal;
@@ -511,6 +531,7 @@ body.nav-menu-open { overflow: hidden; }
 
 .hero-cta {
   margin-top: 2.25rem;
+  font-size: 0.85rem;
   opacity: 0;
   animation: fadeInUp 0.9s ease forwards;
   animation-delay: 1.3s;

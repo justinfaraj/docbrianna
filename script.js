@@ -83,14 +83,22 @@ function renderNav() {
     if (!entry.items) {
       const classes = ['mobile-menu-link'];
       if (entry.cta) classes.push('mobile-menu-cta');
-      return `<a class="${classes.join(' ')}" href="${entry.href}"${linkAttrs(entry)}>${entry.label}</a>`;
+      if (!entry.external && entry.href === here) classes.push('is-current');
+      const current = !entry.external && entry.href === here ? ' aria-current="page"' : '';
+      return `<a class="${classes.join(' ')}" href="${entry.href}"${linkAttrs(entry)}${current}>${entry.label}</a>`;
     }
     // Flattened into full links matching the rest of the menu, rather than
     // a "Services" sub-heading with an indented list — there's no room for
     // a hover-style dropdown on mobile, and each item's mobileText already
     // names the service on its own ("Medical Services", not just "Medical").
     return entry.items
-      .map((item) => `<a class="mobile-menu-link" href="${item.href}">${item.mobileText || item.text}</a>`)
+      .map((item) => {
+        const isCurrent = item.href === here;
+        const classes = ['mobile-menu-link'];
+        if (isCurrent) classes.push('is-current');
+        const current = isCurrent ? ' aria-current="page"' : '';
+        return `<a class="${classes.join(' ')}" href="${item.href}"${current}>${item.mobileText || item.text}</a>`;
+      })
       .join('');
   }).join('');
 
@@ -205,18 +213,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
 
+  // Closing plays a quick fade (.mobile-menu.closing in styles.css) before
+  // [hidden] actually cuts the panel — noticeably faster than the words'
+  // staggered fade-in on open, which is the point. Keep this in step with
+  // that rule's animation-duration if either one changes.
+  const MENU_CLOSE_MS = 220;
+  let menuCloseTimer = null;
+
   const setMenuOpen = (open) => {
     if (!navToggle || !mobileMenu) return;
-    if (open) {
-      mobileMenu.removeAttribute('hidden');
-    } else {
-      mobileMenu.setAttribute('hidden', '');
+
+    if (menuCloseTimer) {
+      clearTimeout(menuCloseTimer);
+      menuCloseTimer = null;
     }
+
     navToggle.setAttribute('aria-expanded', String(open));
     navToggle.classList.toggle('is-open', open);
     // the panel covers the screen, so lock the page behind it rather
     // than letting it scroll out of sync underneath
     document.body.classList.toggle('nav-menu-open', open);
+
+    if (open) {
+      mobileMenu.classList.remove('closing');
+      mobileMenu.removeAttribute('hidden');
+      return;
+    }
+
+    if (mobileMenu.hasAttribute('hidden')) return; // already closed
+    mobileMenu.classList.add('closing');
+    menuCloseTimer = window.setTimeout(() => {
+      mobileMenu.classList.remove('closing');
+      mobileMenu.setAttribute('hidden', '');
+      menuCloseTimer = null;
+    }, MENU_CLOSE_MS);
   };
 
   if (navToggle && mobileMenu) {
