@@ -795,6 +795,17 @@ img { max-width: 100%; }
 
 .about-photo-col { position: sticky; top: calc(var(--nav-h) + 2rem); }
 
+/* Columbia / Yale / Weill Cornell, the three schools named in her bio.
+   Sits directly under the portrait inside the same sticky column, so it
+   scrolls and sticks together with her rather than on its own timing. */
+.school-crests {
+  display: block;
+  width: 100%;
+  max-width: 26rem;
+  height: auto;
+  margin-top: 1.5rem;
+}
+
 .about-body p {
   font-size: 1.05rem;
   line-height: 1.85;
@@ -1061,6 +1072,8 @@ img { max-width: 100%; }
 
   .portrait-photo,
   .media-portrait { max-width: 22rem; margin: 0 auto; }
+
+  .school-crests { max-width: 22rem; margin: 1.5rem auto 0; }
 
   .split,
   .split-wide-text {
