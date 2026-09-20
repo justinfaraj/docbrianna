@@ -767,6 +767,11 @@ body.nav-menu-open { overflow: hidden; }
   text-align: center;
 }
 
+.media-contact-cta {
+  margin: 1.5rem 0 0;
+  text-align: center;
+}
+
 .inline-link {
   color: var(--black);
   border-bottom: 2px solid var(--tint);
