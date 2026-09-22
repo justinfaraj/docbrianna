@@ -21,8 +21,18 @@
   --rule-tint: #DDF1FD;
   --shadow: 0 14px 34px rgba(0, 0, 0, 0.10);
 
+  /* --serif is the headline face (hero name, section headings, large
+     display text) — untouched by the Marcellus swap below.
+     --sans is still the body-copy face (paragraphs, bio text, service
+     descriptions) — also untouched.
+     --font-secondary is the UI/label face: nav links, every "Book an
+     Appointment" button, small tracked-out labels (the uppercase
+     subheading, pill-list group labels, press bylines, etc.), and the
+     footer's informational text. It used to just be --sans everywhere
+     these appeared; now it's its own token so the two can diverge. */
   --serif: 'Playfair Display', Georgia, serif;
   --sans: 'Jost', Helvetica, Arial, sans-serif;
+  --font-secondary: 'Marcellus', 'Playfair Display', Georgia, serif;
 
   --nav-h: 4.5rem;
 }
@@ -146,9 +156,10 @@ img { max-width: 100%; }
   color: var(--white);
   padding: 1.05rem 2.2rem;
   border-radius: 10px;
+  font-family: var(--font-secondary);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   border: 2px solid var(--black);
   transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
@@ -222,10 +233,10 @@ img { max-width: 100%; }
   border: none;
   padding: 0.35rem 0;
   cursor: pointer;
-  font-family: var(--sans);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font-family: var(--font-secondary);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--black);
   border-bottom: 2px solid transparent;
@@ -289,8 +300,9 @@ img { max-width: 100%; }
 
 .nav-dropdown-panel a {
   display: inline-block;
+  font-family: var(--font-secondary);
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--black);
   white-space: nowrap;
   border-bottom: 2px solid var(--tint);
@@ -431,9 +443,9 @@ body.nav-menu-open { overflow: hidden; }
    consistent with every other Book an Appointment button is what makes
    it read as the one actionable item here. */
 .mobile-menu-cta {
-  font-family: var(--sans);
+  font-family: var(--font-secondary);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.1em;
   line-height: normal;
   justify-content: center;
@@ -493,10 +505,11 @@ body.nav-menu-open { overflow: hidden; }
    one lockup, with .hero-tagline starting the next beat below */
 .hero-subheading {
   margin: 0.5rem 0 0;
+  font-family: var(--font-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.09em;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--black);
   opacity: 0;
   animation: fadeInUp 0.9s ease forwards;
@@ -622,9 +635,10 @@ body.nav-menu-open { overflow: hidden; }
   border: 1px dashed rgba(0, 0, 0, 0.25);
   border-radius: 16px;
   color: var(--black-soft);
+  font-family: var(--font-secondary);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   text-align: center;
   padding: 1rem;
@@ -674,9 +688,10 @@ body.nav-menu-open { overflow: hidden; }
   padding: 0.9rem 1.6rem;
   border: 2px solid var(--black);
   border-radius: 999px;
+  font-family: var(--font-secondary);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--black);
   background: var(--white);
@@ -713,9 +728,10 @@ body.nav-menu-open { overflow: hidden; }
   background: #EDEDED;
   border: 1px solid var(--rule);
   border-radius: 10px;
+  font-family: var(--font-secondary);
   font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--black-soft);
   text-align: center;
@@ -813,10 +829,11 @@ body.nav-menu-open { overflow: hidden; }
 
 .quote-attribution {
   margin-top: 1rem;
+  font-family: var(--font-secondary);
   font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--black-soft);
 }
 
@@ -921,9 +938,10 @@ body.nav-menu-open { overflow: hidden; }
 .subgroup + .subgroup { margin-top: 2rem; }
 
 .subgroup-heading {
+  font-family: var(--font-secondary);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--black);
   margin: 0 0 1rem;
@@ -1013,9 +1031,10 @@ body.nav-menu-open { overflow: hidden; }
 
 .press-meta {
   grid-column: 2;
+  font-family: var(--font-secondary);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--black-soft);
 }
@@ -1075,6 +1094,7 @@ body.nav-menu-open { overflow: hidden; }
 
 .location address {
   font-style: normal;
+  font-family: var(--font-secondary);
   font-size: 0.92rem;
   line-height: 1.7;
   color: var(--white);
@@ -1084,6 +1104,7 @@ body.nav-menu-open { overflow: hidden; }
 .location-hours { margin: 0; }
 
 .location-hours li {
+  font-family: var(--font-secondary);
   font-size: 0.85rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.82);
@@ -1097,6 +1118,7 @@ body.nav-menu-open { overflow: hidden; }
 }
 
 .footer-contact li {
+  font-family: var(--font-secondary);
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--white);
@@ -1118,6 +1140,7 @@ body.nav-menu-open { overflow: hidden; }
   margin: 3rem 0 0;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: var(--font-secondary);
   font-size: 0.78rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.78);
