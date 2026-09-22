@@ -122,6 +122,14 @@ img { max-width: 100%; }
 
 .body-text:last-child { margin-bottom: 0; }
 
+/* Emphasis for named credentials within a paragraph — same rule style as
+   .text-link's hover state (2px black border-bottom), just always on. */
+.credential {
+  font-weight: 700;
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 2px;
+}
+
 /* The standard "keep going" link: black ink, tint underline. */
 .text-link {
   display: inline-block;
@@ -749,6 +757,13 @@ body.nav-menu-open { overflow: hidden; }
   font-size: 1.05rem;
   color: var(--black);
   text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.logo-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  background: var(--tint);
 }
 
 .logo-box img {
@@ -944,12 +959,21 @@ body.nav-menu-open { overflow: hidden; }
   font-size: 0.9rem;
   line-height: 1.35;
   color: var(--black);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 /* inverted on a tint band so the pills stay legible against the wash */
 .section-tint .pill-list li {
   background: var(--white);
   border-color: var(--white);
+}
+
+.pill-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
 }
 
 /* ---------- FEATURES PAGE: PRESS INDEX ---------- */
@@ -1136,6 +1160,8 @@ body.nav-menu-open { overflow: hidden; }
 
 .reduced-motion .service-card:hover,
 .reduced-motion .social-link:hover,
+.reduced-motion .logo-box:hover,
+.reduced-motion .pill-list li:hover,
 .reduced-motion .btn:hover { transform: none; }
 
 /* ---------- RESPONSIVE: BELOW 900px ---------- */
