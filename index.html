@@ -3,154 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eagle Point Coaching | Executive Coach</title>
-<meta name="description" content="Eagle Point Coaching offers personalized executive coaching with Meaghan Janedis to help you find clarity, confidence, and freedom in your career.">
-<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<title>Dr. Brianna | Medical &amp; Cosmetic Dermatologist in New York City</title>
+<meta name="description" content="Dr. Brianna Olamiju is a board-certified medical and cosmetic dermatologist in New York City. Your best skin starts here.">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- Two identical stacked copies of the label, one inked navy and one ivory.
-     script.js clips each to the exact pixel where the band behind the label
-     changes, so a word straddling a boundary splits mid-glyph instead of
-     flipping colour all at once. -->
-<div class="vertical-label" id="section-label" aria-hidden="true">
-  <span class="vertical-label-layer vertical-label-navy"><span class="vertical-label-text">Home</span></span>
-  <span class="vertical-label-layer vertical-label-ivory"><span class="vertical-label-text">Home</span></span>
-</div>
+<!-- Shared top nav, injected by script.js from the single NAV_ITEMS list -->
+<div id="site-nav"></div>
 
-<!-- SECTION 1: HERO -->
-<div class="page" id="home" data-label="Home">
+<main>
 
-  <!-- LEFT PANEL -->
-  <section class="panel panel-left">
-
-    <!-- Shared nav (mobile-nav + corner-menu), injected by script.js
-         from the single NAV_GROUPS list so every page stays in sync -->
-    <div id="site-nav"></div>
-
-    <div class="left-content">
-      <h1><img class="hero-logo" src="assets/images/eagle-point-logo.png" alt="Eagle Point Coaching logo"></h1>
-
-      <p class="subheading">Find Your Freedom With Executive Coaching</p>
+  <!-- SECTION 1: HERO (white) -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1 class="hero-name">Dr. Brianna</h1>
+        <p class="hero-subheading">Medical &amp; Cosmetic Dermatologist</p>
+        <p class="hero-tagline">Your Best Skin Starts Here</p>
+        <span class="hero-rule" aria-hidden="true"></span>
+        <a class="btn hero-cta" href="https://springstderm.com/physicians/dr-olamiju/" target="_blank" rel="noopener noreferrer">Book An Appointment</a>
+      </div>
+      <div class="hero-portrait-wrap">
+        <img class="hero-portrait" src="images/dr-brianna-hero.webp" alt="Dr. Brianna Olamiju">
+      </div>
     </div>
-
-    <div class="bottom-left">
-      <a href="book-a-session.html" class="book-btn">Book a Session</a>
-    </div>
-
   </section>
 
-  <!-- RIGHT PANEL -->
-  <section class="panel panel-right">
-    <a href="#about-meaghan" class="photo-callout">Meet Your Coach,<br>Meaghan Janedis</a>
-
-    <img class="meaghan-photo" src="images/meaghan-janedis.png" alt="Meaghan Janedis, executive coach">
+  <!-- SECTION 2: WHO IS DR. BRIANNA (tint) -->
+  <section class="section section-tint" id="who">
+    <div class="section-inner section-inner-narrow">
+      <h2 class="section-heading">Who Is Dr. Brianna?</h2>
+      <p class="body-text">
+        Dr. Brianna Olamiju is a board-certified dermatologist with expertise in
+        both medical and cosmetic dermatology. A native New Yorker, she completed
+        her undergraduate studies at Columbia University, earned her medical degree
+        from the Yale School of Medicine, and completed her dermatology residency at
+        Weill Cornell New York-Presbyterian Hospital. Dr. Olamiju has published
+        numerous journal articles and textbook chapters, and her work has been
+        recognized by the American Academy of Dermatology and JAMA Dermatology. She
+        serves on the Board of Directors of the Women's Dermatologic Society and is
+        an active member of the American Society for Dermatologic Surgery and the
+        Skin of Color Society. Her clinical interests span acne, hair loss, eczema,
+        psoriasis, pigmentary disorders, and skin cancer screening, alongside a full
+        suite of cosmetic treatments including filler, lasers, and microneedling.
+      </p>
+      <a class="text-link" href="about.html">Learn more about Dr. Brianna &rarr;</a>
+    </div>
   </section>
 
-  <!-- Brand guide arrow: swoops from the callout down into the About section -->
-  <svg class="guide-arrow guide-arrow-hero" viewBox="0 0 140 560" fill="none" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-    <path d="M40 16
-             C96 34 122 92 92 142
-             C66 186 30 220 52 262
-             C70 296 116 296 118 260
-             C120 230 84 218 66 250
-             C44 290 84 330 90 390
-             C94 440 80 470 72 512"
-          stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-    <path d="M52 488 L72 518 L95 494"
-          stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
+  <!-- SECTION 3: MY SERVICES (white) -->
+  <section class="section" id="services">
+    <div class="section-inner">
+      <h2 class="section-heading section-heading-center">My Services</h2>
 
-</div>
+      <div class="card-grid">
+        <article class="service-card">
+          <h3>Medical</h3>
+          <p>Skin care rooted in science and personal attention.</p>
+          <a class="text-link" href="medical-services.html">Explore medical services &rarr;</a>
+        </article>
 
-<!-- SECTION 2: ABOUT (even section: navy band) -->
-<section class="about section-dark" id="about-meaghan" data-label="About">
-
-  <div class="about-content">
-    <h2 class="about-heading">Meet Meaghan Janedis</h2>
-    <p class="about-text">
-      Meaghan is a seasoned startup CEO with a long history of helping people
-      achieve their goals. She began her career on Wall Street, building
-      relationships with her firms' key clients, then followed her
-      entrepreneurial spirit to found companies across industries close to her
-      passions &mdash; parenthood, athletics, eldercare &mdash; with ethics at
-      the core of everything she does.
-    </p>
-    <p class="about-text">
-      Eagle Point Coaching brings all of that experience to a more personal
-      level, helping people achieve their professional and personal
-      aspirations.
-    </p>
-    <ul class="about-credentials">
-      <li>Captained her college tennis team to the 1992 &amp; 1993 NCAA Div. III Championship</li>
-      <li>Licensed in Series 6, 7, 63 &amp; SIE &mdash; Bear, Stearns, Merrill Lynch &amp; New York Life</li>
-      <li>Founder &amp; CEO of Eagle Point Coaching and multiple companies before it</li>
-      <li>Personally mentors young adults launching their educational and professional careers</li>
-    </ul>
-    <a href="about-meaghan.html" class="about-link">Read Meaghan's full story &rarr;</a>
-  </div>
-</section>
-
-<!-- SECTION 3: TESTIMONIALS (odd section: ivory band) -->
-<section class="testimonials" id="testimonials" data-label="Testimonials">
-
-  <!-- Guide arrow variant E: the same "cross the band boundary" gesture as
-       the hero arrow that leads into About, mirrored onto the left margin —
-       it carries the eye out of the navy band and down into the first quote -->
-  <svg class="guide-arrow guide-arrow-testimonials" viewBox="0 0 130 396" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-    <path d="M98 10
-             C46 26 18 78 46 122
-             C70 160 114 152 110 116
-             C106 88 68 92 64 128
-             C58 182 100 210 92 262
-             C86 306 74 334 80 380"
-          stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-    <path d="M60 356 L80 386 L103 362"
-          stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-
-  <div class="testimonials-inner">
-    <h2 class="testimonials-heading">What Clients Are Saying</h2>
-
-    <div class="quote-stack">
-
-      <figure class="quote-block quote-left">
-        <blockquote>&ldquo;Thanks to her impeccable guidance, I secured a 15% raise, but more importantly, confidence in advocating for myself.&rdquo;</blockquote>
-        <figcaption class="quote-attribution">
-          Sophia Z.
-          <span class="quote-affiliation">Fordham University</span>
-        </figcaption>
-      </figure>
-
-      <figure class="quote-block quote-right">
-        <blockquote>&ldquo;She&rsquo;s helped me clarify my long-term goals and build a realistic, sustainable study schedule.&rdquo;</blockquote>
-        <figcaption class="quote-attribution">
-          Lindsey N.
-          <span class="quote-affiliation">University of Pennsylvania</span>
-        </figcaption>
-      </figure>
-
-      <figure class="quote-block quote-left">
-        <blockquote>&ldquo;Her guidance helped me unlock a level of confidence and clarity I didn&rsquo;t know I had.&rdquo;</blockquote>
-        <figcaption class="quote-attribution">
-          Lisa R.
-          <span class="quote-affiliation">Penn Carey Law, Class of 2027</span>
-        </figcaption>
-      </figure>
-
+        <article class="service-card">
+          <h3>Cosmetic</h3>
+          <p>Botox, PRP, filler, lasers, and more &mdash; treatments designed to enhance what you already have.</p>
+          <a class="text-link" href="cosmetic-services.html">Explore cosmetic services &rarr;</a>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <!-- these are excerpts; the full four live on their own page, the same
-         way the About section hands off to Meaghan's full story -->
-    <p class="testimonials-more">
-      <a href="testimonials.html" class="about-link">Read the full testimonials &rarr;</a>
-    </p>
-  </div>
-</section>
+  <!-- SECTION 4: FROM HER OFFICE TO YOUR SCREEN (tint) -->
+  <section class="section section-tint" id="online">
+    <div class="section-inner">
+      <div class="split split-wide-text">
+        <div>
+          <h2 class="section-heading">From Her Office To Your Screen</h2>
+          <p class="body-text">
+            Dr. Brianna believes great skincare shouldn't be a secret. Through her
+            social media channels and online content, she breaks down complex skin
+            science into clear, actionable advice, so you can make informed decisions
+            about your skin, whether you're a patient or not. From ingredient
+            deep-dives to myth-busting common skincare mistakes, her videos bring the
+            expertise of a medical office directly to your feed.
+          </p>
+          <a class="text-link" href="features.html">Check Out Dr. Brianna's Media Features &rarr;</a>
+        </div>
+
+        <video class="home-video" src="videos/dr-brianna-intro.mp4" poster="images/video-poster.jpg" controls playsinline preload="metadata">
+          Your browser doesn't support embedded video. <a href="videos/dr-brianna-intro.mp4">Watch it here</a> instead.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: FOLLOW DR. BRIANNA ONLINE (white) -->
+  <section class="section" id="follow">
+    <div class="section-inner">
+      <h2 class="section-heading section-heading-center">Follow Dr. Brianna Online</h2>
+
+      <div class="social-row">
+        <a class="social-link" href="https://www.tiktok.com/@docbrianna?lang=en" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.79-2.46V9.79a5.77 5.77 0 1 0 4.88 5.7V9.01a7.35 7.35 0 0 0 4.29 1.38V7.3a4.28 4.28 0 0 1-3.23-1.48Z"/></svg>
+          TikTok
+        </a>
+
+        <a class="social-link" href="https://www.instagram.com/docbrianna/?hl=en" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07Zm0 6.28a3.56 3.56 0 1 0 0 7.12 3.56 3.56 0 0 0 0-7.12Zm0 5.87a2.31 2.31 0 1 1 0-4.62 2.31 2.31 0 0 1 0 4.62Zm4.53-6.01a.83.83 0 1 1-1.66 0 .83.83 0 0 1 1.66 0Z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: INSTAGRAM FEED (tint) -->
+  <section class="section section-tint" id="instagram">
+    <div class="section-inner">
+      <h2 class="section-heading section-heading-center">From The Feed</h2>
+
+      <!-- ===== PLACEHOLDER: LIVE INSTAGRAM FEED =====
+           This is a static row of square tiles standing in for the real feed.
+           A genuine live feed needs a third-party widget (Elfsight, Behold,
+           LightWidget, SnapWidget, or the Instagram Basic Display API), which
+           hasn't been chosen yet. When it is, delete the .ig-grid block below
+           and drop the widget's embed snippet in its place — nothing else on
+           this page depends on it. -->
+      <div class="ig-grid">
+        <div class="ig-tile">Instagram post</div>
+        <div class="ig-tile">Instagram post</div>
+        <div class="ig-tile">Instagram post</div>
+        <div class="ig-tile">Instagram post</div>
+        <div class="ig-tile">Instagram post</div>
+        <div class="ig-tile">Instagram post</div>
+      </div>
+      <!-- ===== END PLACEHOLDER ===== -->
+    </div>
+  </section>
+
+  <!-- SECTION 7: AS SEEN IN (white) -->
+  <section class="section" id="as-seen-in">
+    <div class="section-inner">
+      <h2 class="section-heading section-heading-center">As Seen In</h2>
+
+      <div class="logo-row">
+        <div class="logo-box"><img src="images/essence-logo.webp" alt="Essence"></div>
+        <div class="logo-box"><img src="images/allure-logo.webp" alt="Allure"></div>
+        <div class="logo-box"><img src="images/womens-health-logo.webp" alt="Women's Health"></div>
+        <div class="logo-box"><img src="images/yahoo-news-logo.webp" alt="Yahoo News"></div>
+      </div>
+
+      <p class="media-contact">
+        Dr. Brianna's expertise has been recognized by some of the most trusted
+        names in health and beauty.
+      </p>
+      <p class="media-contact">
+        For media/collaborations, please contact
+        <a class="inline-link" href="mailto:askdocbrianna@gmail.com">askdocbrianna@gmail.com</a>
+      </p>
+      <p class="media-contact-cta">
+        <a class="text-link" href="features.html">Check Out Dr. Brianna's Media Features &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 8: TESTIMONIALS (tint) -->
+  <section class="section section-tint" id="testimonials">
+    <div class="section-inner">
+      <h2 class="section-heading section-heading-center">What Patients Are Saying</h2>
+
+      <div class="quote-stack">
+        <figure class="quote-block quote-left">
+          <blockquote>&ldquo;Dr. Brianna Olamiju is an excellent dermatologist, knowledgeable, patient, and very thorough. She took the time to explain everything clearly and made me feel comfortable throughout the visit. The office was clean and the staff was friendly. Highly recommend!&rdquo;</blockquote>
+        </figure>
+
+        <figure class="quote-block quote-right">
+          <blockquote>&ldquo;Dr. Brianna is the best! I have been recommending family and friends to see her. I really appreciate her caring and thoughtful approach. She treats patients kindly in a compassionate manner. I have seen her both for medical dermatology and cosmetic dermatology and she is great at both.&rdquo;</blockquote>
+        </figure>
+
+        <figure class="quote-block quote-left">
+          <blockquote>&ldquo;Truly an exceptional experience. The entire staff, from the front desk, assistants, and Brianna Olamiju, MD, were welcoming, patient, intentional, and thorough. Dr. Olamiju is highly knowledgeable and collaborative in her approach to patient care. I left my appointment knowing I was in the hands of a provider I can trust, who's also solutions-focused, which I appreciate.&rdquo;</blockquote>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: CLOSING CTA (white) -->
+  <section class="section cta-section" id="book">
+    <div class="section-inner section-inner-narrow">
+      <h2 class="cta-heading">Come in, let's talk about your skin</h2>
+      <!-- Booking lives on the practice's own site, so this leaves the domain -->
+      <a class="btn" href="https://springstderm.com/physicians/dr-olamiju/" target="_blank" rel="noopener noreferrer">Book An Appointment</a>
+    </div>
+  </section>
+
+</main>
 
 <!-- Shared footer, injected by script.js -->
 <div id="site-footer"></div>
