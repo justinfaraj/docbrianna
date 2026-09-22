@@ -122,15 +122,12 @@ img { max-width: 100%; }
 
 .body-text:last-child { margin-bottom: 0; }
 
-/* Elegant emphasis for named credentials within a paragraph — a thin
-   underline offset from the text rather than a bold/color change, so it
-   reads as a quiet accent, not a link. Black ink: on this section's tint
-   wash, --tint underlines would vanish into the background. */
+/* Emphasis for named credentials within a paragraph — same rule style as
+   .text-link's hover state (2px black border-bottom), just always on. */
 .credential {
-  text-decoration: underline;
-  text-decoration-color: var(--black);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 2px;
 }
 
 /* The standard "keep going" link: black ink, tint underline. */
