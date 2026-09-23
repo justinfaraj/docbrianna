@@ -704,30 +704,14 @@ body.nav-menu-open { overflow: hidden; }
   fill: currentColor;
 }
 
-/* ---------- INSTAGRAM TILE ROW (static placeholder) ---------- */
+/* ---------- INSTAGRAM FEED (live, via Taggbox) ---------- */
 
-.ig-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  gap: 1rem;
+.ig-feed {
+  height: 34rem;
+  max-height: 70vh;
   margin-top: 2.25rem;
-}
-
-.ig-tile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1 / 1;
-  background: #EDEDED;
-  border: 1px solid var(--rule);
   border-radius: 10px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--black-soft);
-  text-align: center;
-  padding: 0.5rem;
+  overflow: hidden;
 }
 
 /* ---------- AS SEEN IN ---------- */
