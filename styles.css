@@ -570,14 +570,17 @@ body.nav-menu-open { overflow: hidden; }
   height: auto;
 }
 
-/* Floats over the photo's top-right corner, roughly at shoulder height on
-   a head-and-shoulders crop. Anchored to the wrap (== the photo's own
-   box at every breakpoint), so only the type scales down on mobile. */
+/* Floats in the clear space above the photo's top-right corner, right over
+   the shoulder line. Anchored via bottom:100% (its own bottom edge pinned
+   just above the wrap's top edge) rather than a negative top offset, so
+   its footprint never overlaps the photo itself — this crop has almost no
+   headroom above the hairline, so any overlap reads as covering her face. */
 .hero-credential-badge {
   position: absolute;
-  top: -1.1rem;
+  bottom: 100%;
+  margin-bottom: 0.85rem;
   right: 0;
-  max-width: min(70%, 13.5rem);
+  max-width: min(75%, 17rem);
   background: var(--white);
   border: 1px solid var(--tint);
   border-radius: 14px;
@@ -1225,7 +1228,7 @@ body.nav-menu-open { overflow: hidden; }
   .hero-portrait-wrap { margin: 0 auto; max-width: 18rem; }
 
   .hero-credential-badge {
-    top: -0.9rem;
+    margin-bottom: 0.6rem;
     max-width: min(75%, 11rem);
     padding: 0.65rem 0.8rem;
     border-radius: 12px;
