@@ -1129,18 +1129,16 @@ body.nav-menu-open { overflow: hidden; }
    content column on ~360px phones and clips the card's right edge. */
 .brand-embed-wrap .instagram-media { min-width: 0 !important; }
 
-/* Brand name, above the embed rather than below — its own larger size
-   rather than reusing .credential-strip-item, so it reads as a heading
-   for the tile, not a small nav-style caption. */
-.brand-tile-label {
-  margin: 0;
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 1.4rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--black);
-  text-align: center;
+/* The brand's own logo, above the embed rather than below. Height-aligned
+   rather than width-aligned — logos differ wildly in aspect ratio (a tall
+   narrow wordmark next to a wide lockup), so a fixed max-height with
+   width:auto keeps every tile's mark reading at the same visual weight
+   instead of stretching the narrow ones or shrinking the wide ones. */
+.brand-tile-logo {
+  display: block;
+  max-height: 2.75rem;
+  max-width: 100%;
+  width: auto;
 }
 
 @media (max-width: 900px) {
@@ -1152,7 +1150,7 @@ body.nav-menu-open { overflow: hidden; }
 
 @media (max-width: 768px) {
   .brand-tile { flex-basis: 100%; max-width: 100%; }
-  .brand-tile-label { font-size: 1.75rem; }
+  .brand-tile-logo { max-height: 3.5rem; }
 }
 
 /* ---------- SITE FOOTER (persistent, injected by script.js) ---------- */
