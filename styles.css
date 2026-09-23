@@ -547,17 +547,10 @@ body.nav-menu-open { overflow: hidden; }
 
 /* align-self (not the row's align-items) bottom-docks just this column,
    so the photo's own bottom edge always touches the section's bottom
-   edge while the copy column stays vertically centered beside it.
-   The wrap is sized to hug the photo itself (rather than stretch to the
-   full grid column and flex-align the image inside it) so the credential
-   badge, anchored to the wrap's own corner, always tracks the photo's
-   actual edge — on every breakpoint — instead of drifting once the photo
-   re-centers on narrower screens. */
+   edge while the copy column stays vertically centered beside it. */
 .hero-portrait-wrap {
-  position: relative;
-  width: 100%;
-  max-width: 25rem;
-  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
   align-self: end;
   opacity: 0;
   animation: fadeIn 1.1s ease forwards;
@@ -567,50 +560,57 @@ body.nav-menu-open { overflow: hidden; }
 .hero-portrait {
   display: block;
   width: 100%;
+  max-width: 25rem;
   height: auto;
 }
 
-/* Floats in the clear space above the photo's top-right corner, right over
-   the shoulder line. Anchored via bottom:100% (its own bottom edge pinned
-   just above the wrap's top edge) rather than a negative top offset, so
-   its footprint never overlaps the photo itself — this crop has almost no
-   headroom above the hairline, so any overlap reads as covering her face. */
-.hero-credential-badge {
-  position: absolute;
-  bottom: 100%;
-  margin-bottom: 0.85rem;
-  right: 0;
-  max-width: min(75%, 17rem);
-  background: var(--white);
-  border: 1px solid var(--tint);
-  border-radius: 14px;
-  padding: 0.8rem 1rem;
-  text-align: right;
-  box-shadow: var(--shadow);
-  z-index: 5;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-  animation-delay: 0.7s;
+/* ---------- CREDENTIAL STRIP (full-width trust bar under the hero) ---------- */
+
+/* Flat band, edge to edge — no card, no shadow, no border around the
+   whole strip. Hairlines top/bottom only, so it reads as its own band
+   rather than bleeding into the tint section right after it. */
+.credential-strip {
+  background: var(--tint);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1.75rem 2rem;
 }
 
-.hero-credential-title {
-  font-family: var(--serif);
-  font-weight: 700;
-  font-style: italic;
-  font-size: clamp(0.7rem, 1.6vw, 0.86rem);
-  line-height: 1.25;
-  margin: 0 0 0.35rem;
+.credential-strip-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Same uppercase/letter-spacing treatment as .nav-link — the established
+   sans-serif system, not a new typeface. */
+.credential-strip-item {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--black);
-  text-wrap: pretty;
+  text-align: center;
 }
 
-.hero-credential-schools {
-  font-size: clamp(0.52rem, 1vw, 0.6rem);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.5;
-  color: var(--black-soft);
-  margin: 0;
+.credential-strip-divider {
+  width: 1px;
+  height: 1rem;
+  background: rgba(0, 0, 0, 0.22);
+  margin: 0 1.75rem;
+  flex-shrink: 0;
+}
+
+/* Just above the stacking breakpoint, the three names don't quite fit
+   one line at full desktop spacing — tighten rather than let it wrap
+   awkwardly mid-item. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .credential-strip-item { font-size: 0.62rem; letter-spacing: 0.14em; }
+  .credential-strip-divider { margin: 0 1rem; }
 }
 
 /* ---------- SERVICE CARDS ---------- */
@@ -1225,13 +1225,27 @@ body.nav-menu-open { overflow: hidden; }
     gap: 2.5rem;
   }
 
-  .hero-portrait-wrap { margin: 0 auto; max-width: 18rem; }
+  .hero-portrait-wrap { justify-content: center; }
 
-  .hero-credential-badge {
-    margin-bottom: 0.6rem;
-    max-width: min(75%, 11rem);
-    padding: 0.65rem 0.8rem;
-    border-radius: 12px;
+  .hero-portrait { max-width: 18rem; }
+
+  /* stacked, centered; dividers rotate from vertical bars to thin
+     horizontal rules between lines rather than disappearing. Shares the
+     hero's own 900px breakpoint rather than the usual 768px one — the
+     three institution names don't fit on one line below that width, and
+     switching in step with the hero avoids an in-between zone where the
+     row would wrap mid-item. */
+  .credential-strip { padding: 1.5rem 1.5rem; }
+
+  .credential-strip-inner {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .credential-strip-divider {
+    width: 2rem;
+    height: 1px;
+    margin: 0;
   }
 
   .card-grid { grid-template-columns: minmax(0, 1fr); }
