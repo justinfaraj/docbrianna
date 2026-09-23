@@ -772,9 +772,20 @@ body.nav-menu-open { overflow: hidden; }
   margin: 2.5rem 0 2.25rem;
 }
 
-/* the features page carries six outlets rather than four, so it gets its
-   own column count at each breakpoint below instead of .logo-row's */
-.logo-row-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* The features page carries a variable number of outlets (currently
+   seven), so unlike .logo-row's fixed 4-item grid, this is flexbox with
+   justify-content:center — a wrapped incomplete last row centers itself
+   automatically instead of leaving a lone logo stranded on the left. */
+.logo-row-6 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.logo-row-6 .logo-box {
+  flex: 0 0 calc((100% - 2 * 1.25rem) / 3);
+  max-width: calc((100% - 2 * 1.25rem) / 3);
+}
 
 .logo-box {
   display: flex;
@@ -1317,8 +1328,12 @@ body.nav-menu-open { overflow: hidden; }
 
   .card-grid { grid-template-columns: minmax(0, 1fr); }
 
-  .logo-row,
-  .logo-row-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .logo-row-6 .logo-box {
+    flex-basis: calc((100% - 1.25rem) / 2);
+    max-width: calc((100% - 1.25rem) / 2);
+  }
 
   /* stacked, with the divider moving from the side to between them */
   .locations { grid-template-columns: minmax(0, 1fr); }
@@ -1380,7 +1395,7 @@ body.nav-menu-open { overflow: hidden; }
 }
 
 @media (max-width: 480px) {
-  .logo-row,
-  .logo-row-6 { grid-template-columns: minmax(0, 1fr); }
+  .logo-row { grid-template-columns: minmax(0, 1fr); }
+  .logo-row-6 .logo-box { flex-basis: 100%; max-width: 100%; }
   .footer-contact { gap: 0.5rem; flex-direction: column; }
 }
