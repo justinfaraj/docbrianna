@@ -1107,14 +1107,24 @@ body.nav-menu-open { overflow: hidden; }
 .brand-embed-wrap {
   width: 100%;
   max-width: 540px;
-  min-height: 620px;
+  min-height: 590px;
   background: var(--tint);
   border-radius: 12px;
   overflow: hidden;
 }
 
+/* Brand name, above the embed rather than below — its own larger size
+   rather than reusing .credential-strip-item, so it reads as a heading
+   for the tile, not a small nav-style caption. */
 .brand-tile-label {
   margin: 0;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-align: center;
 }
 
 @media (max-width: 900px) {
