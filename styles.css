@@ -1129,16 +1129,26 @@ body.nav-menu-open { overflow: hidden; }
    content column on ~360px phones and clips the card's right edge. */
 .brand-embed-wrap .instagram-media { min-width: 0 !important; }
 
-/* The brand's own logo, above the embed rather than below. Height-aligned
-   rather than width-aligned — logos differ wildly in aspect ratio (a tall
-   narrow wordmark next to a wide lockup), so a fixed max-height with
-   width:auto keeps every tile's mark reading at the same visual weight
-   instead of stretching the narrow ones or shrinking the wide ones. */
+/* The brand's own logo, above the embed rather than below. The wrap is a
+   fixed-height box (not the image itself) so every tile reserves the same
+   vertical space here regardless of that brand's own logo proportions —
+   a short wide wordmark and a tall stacked lockup both center within it,
+   which keeps every row's embeds starting at the same height instead of
+   drifting down under whichever logo happens to render tallest. */
+.brand-tile-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 1.65rem;
+}
+
 .brand-tile-logo {
   display: block;
-  max-height: 2.75rem;
+  max-height: 100%;
   max-width: 100%;
   width: auto;
+  height: auto;
 }
 
 @media (max-width: 900px) {
@@ -1150,7 +1160,7 @@ body.nav-menu-open { overflow: hidden; }
 
 @media (max-width: 768px) {
   .brand-tile { flex-basis: 100%; max-width: 100%; }
-  .brand-tile-logo { max-height: 3.5rem; }
+  .brand-tile-logo-wrap { height: 2.1rem; }
 }
 
 /* ---------- SITE FOOTER (persistent, injected by script.js) ---------- */
