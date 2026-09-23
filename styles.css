@@ -1113,6 +1113,11 @@ body.nav-menu-open { overflow: hidden; }
   overflow: hidden;
 }
 
+/* Instagram hard-codes min-width:326px inline (on both the placeholder
+   blockquote and the iframe that replaces it), which is wider than the
+   content column on ~360px phones and clips the card's right edge. */
+.brand-embed-wrap .instagram-media { min-width: 0 !important; }
+
 /* Brand name, above the embed rather than below — its own larger size
    rather than reusing .credential-strip-item, so it reads as a heading
    for the tile, not a small nav-style caption. */
@@ -1120,7 +1125,7 @@ body.nav-menu-open { overflow: hidden; }
   margin: 0;
   font-family: var(--sans);
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--black);
@@ -1136,6 +1141,7 @@ body.nav-menu-open { overflow: hidden; }
 
 @media (max-width: 768px) {
   .brand-tile { flex-basis: 100%; max-width: 100%; }
+  .brand-tile-label { font-size: 1.75rem; }
 }
 
 /* ---------- SITE FOOTER (persistent, injected by script.js) ---------- */
