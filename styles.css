@@ -187,7 +187,7 @@ img { max-width: 100%; }
 }
 
 .topnav-inner {
-  max-width: 76rem;
+  max-width: 82rem;
   margin: 0 auto;
   min-height: var(--nav-h);
   padding: 0 2rem;
@@ -211,7 +211,7 @@ img { max-width: 100%; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  gap: 2rem;
   margin-left: auto;
 }
 
