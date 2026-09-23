@@ -24,7 +24,7 @@ const NAV_ITEMS = [
       { text: 'Cosmetic', mobileText: 'Cosmetic Services', href: 'cosmetic-services.html' },
     ],
   },
-  { label: 'Features', href: 'features.html' },
+  { label: 'Press Features', href: 'features.html' },
   { label: 'Brand Partnerships', href: 'brand-partnerships.html' },
   { label: 'Recommendations', href: RECOMMENDATIONS_URL, external: true },
   { label: 'Book an Appointment', href: BOOKING_URL, external: true, cta: true },
