@@ -89,15 +89,6 @@ img { max-width: 100%; }
   max-width: 46rem;
 }
 
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
-  font-size: 0.7rem;
-  color: var(--black-soft);
-  font-weight: 600;
-  margin: 0 0 1.25rem;
-}
-
 .section-heading {
   font-family: var(--serif);
   font-weight: 700;
@@ -868,15 +859,6 @@ body.nav-menu-open { overflow: hidden; }
   line-height: 1.65;
   color: var(--black);
   text-wrap: pretty;
-}
-
-.quote-attribution {
-  margin-top: 1rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--black-soft);
 }
 
 /* ---------- CLOSING CTA ---------- */
