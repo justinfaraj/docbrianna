@@ -853,7 +853,6 @@ body.nav-menu-open { overflow: hidden; }
 .quote-block blockquote {
   margin: 0;
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 400;
   font-size: clamp(1.02rem, 1.45vw, 1.22rem);
   line-height: 1.65;
@@ -902,6 +901,10 @@ body.nav-menu-open { overflow: hidden; }
   color: var(--black);
   text-wrap: balance;
 }
+
+/* .page-head is always a tint wash, so a link's usual tint underline
+   would vanish into it -- ink it black here, same fix as elsewhere. */
+.page-head .inline-link { border-bottom-color: var(--black); }
 
 /* ---------- ABOUT PAGE ---------- */
 
