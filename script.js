@@ -6,7 +6,7 @@
 const BOOKING_URL = 'https://springstderm.com/physicians/dr-olamiju/';
 
 // Her Amazon storefront of recommended products, also off-domain.
-const RECOMMENDATIONS_URL = 'https://www.amazon.com/shop/docbrianna';
+const RECOMMENDATIONS_URL = 'https://shopmy.us/shop/docbrianna?tab=latest';
 
 // One ordered list of top-level nav entries. An entry with `items` renders
 // as a dropdown; everything else is a plain link. Order here is the order
