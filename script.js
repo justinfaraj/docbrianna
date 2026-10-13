@@ -8,6 +8,9 @@ const BOOKING_URL = 'https://springstderm.com/physicians/dr-olamiju/';
 // Her Amazon storefront of recommended products, also off-domain.
 const RECOMMENDATIONS_URL = 'https://shopmy.us/shop/docbrianna?tab=latest';
 
+// Her PubMed author listing, also off-domain.
+const RESEARCH_URL = 'https://pubmed.ncbi.nlm.nih.gov/?term=Olamiju+B&cauthor_id=32255214';
+
 // One ordered list of top-level nav entries. An entry with `items` renders
 // as a dropdown; everything else is a plain link. Order here is the order
 // on the page.
@@ -24,6 +27,7 @@ const NAV_ITEMS = [
       { text: 'Cosmetic', mobileText: 'Cosmetic Services', href: 'cosmetic-services.html' },
     ],
   },
+  { label: 'Research', href: RESEARCH_URL, external: true },
   { label: 'Press Features', href: 'features.html' },
   { label: 'Brand Partnerships', href: 'brand-partnerships.html' },
   { label: 'Recommendations', href: RECOMMENDATIONS_URL, external: true },
