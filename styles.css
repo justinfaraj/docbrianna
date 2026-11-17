@@ -1244,20 +1244,25 @@ body.nav-menu-open { overflow: hidden; }
 
 .site-footer :focus-visible { outline-color: var(--tint); }
 
-.footer-credit {
-  margin: 3rem 0 0;
+.footer-bottom {
+  margin-top: 3rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.4rem 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-credit {
+  margin: 0;
   font-size: 0.78rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.78);
 }
 
-.footer-credit.footer-dev {
-  margin-top: 0.4rem;
-  padding-top: 0;
-  border-top: none;
-}
+.footer-credit.footer-dev { text-align: right; }
 
 /* ---------- REDUCED MOTION ---------- */
 
@@ -1407,4 +1412,5 @@ body.nav-menu-open { overflow: hidden; }
   .logo-row { grid-template-columns: minmax(0, 1fr); }
   .logo-row-6 .logo-box { flex-basis: 100%; max-width: 100%; }
   .footer-contact { gap: 0.5rem; flex-direction: column; }
+  .footer-credit.footer-dev { text-align: left; }
 }
