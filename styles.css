@@ -1253,6 +1253,12 @@ body.nav-menu-open { overflow: hidden; }
   color: rgba(255, 255, 255, 0.78);
 }
 
+.footer-credit.footer-dev {
+  margin-top: 0.4rem;
+  padding-top: 0;
+  border-top: none;
+}
+
 /* ---------- REDUCED MOTION ---------- */
 
 .reduced-motion .hero-name,

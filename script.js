@@ -163,6 +163,7 @@ function renderFooter() {
         </div>
 
         <p class="footer-credit">Copyright &copy; 2026 Brianna Olamiju, MD. All Rights Reserved.</p>
+        <p class="footer-credit footer-dev">Website developed by Justin Farajollah. Visit <a class="footer-link" href="https://justinfarajollah.com" target="_blank" rel="noopener noreferrer">justinfarajollah.com</a> to make your website vision a reality.</p>
       </div>
     </footer>
   `;
